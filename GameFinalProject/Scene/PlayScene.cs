@@ -17,7 +17,7 @@ namespace GameFinalProject
         private SpriteBatch spriteBatch;
         private Song song;
         private Texture2D background;
-        private Vector2 backgroundPosition = new Vector2(0,0);
+        private Vector2 backgroundPosition = new Vector2(0,-400);
 
         private Alien alien;
         private Vector2 alienSpeed = new Vector2(2, 2);

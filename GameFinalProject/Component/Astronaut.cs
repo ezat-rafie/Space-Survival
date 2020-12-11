@@ -57,7 +57,7 @@ namespace GameFinalProject.Component
         private void createFrames()
         {
             frames = new List<Rectangle>();
-            for (int i = 0; i < tex.Height / HEIGHT; i++)
+            for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < tex.Width / WIDTH; j++)
                 {
@@ -87,7 +87,7 @@ namespace GameFinalProject.Component
             if (delayCounter > delay)
             {
                 frameIndex++;
-                if (frameIndex > tex.Height / HEIGHT * tex.Width / WIDTH - 1)
+                if (frameIndex > 3 * tex.Width / WIDTH - 1)
                 {
                     frameIndex = -1;
                     //hide();

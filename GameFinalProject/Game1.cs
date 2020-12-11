@@ -116,7 +116,7 @@ namespace GameFinalProject
 
             //Graphics
             Texture2D menuBackground = this.Content.Load<Texture2D>("Images/Menu");
-            Texture2D gameBackground = this.Content.Load<Texture2D>("Images/GameBackground");
+            Texture2D gameBackground = this.Content.Load<Texture2D>("Images/newbg");
 
             // Instantiate all scenes
             startScene = new StartScene(this, spriteBatch, startMusic, click, menuBackground);
