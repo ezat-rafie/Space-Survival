@@ -22,11 +22,11 @@ namespace GameFinalProject
 
         //Alien
         private Alien alien;
-        private Vector2 alienSpeed = new Vector2(2, 2);
+        private Vector2 alienSpeed = new Vector2(1, 1);
+        private Vector2 alienPosition = new Vector2(2, 2);
 
         //Astronaut
         private Astronaut astronaut;
-        private Vector2 alienPosition = new Vector2(2, 2);
 
         // add string components
         StringComponent msInfo;
@@ -94,6 +94,9 @@ namespace GameFinalProject
 
         public override void Update(GameTime gameTime)
         {
+            Vector2 direction = astronaut.Position - alien.Position;
+            direction.Normalize();
+            alien.Position += direction * alien.Speed;
             //mouseClick explosion
             MouseState ms = Mouse.GetState();
 
