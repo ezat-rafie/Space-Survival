@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Component\AboutComponent.cs" />
     <Compile Include="Component\Alien.cs" />
+    <Compile Include="Component\Astronaut.cs" />
     <Compile Include="Scene\AboutScene.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Scene\GameScene.cs" />

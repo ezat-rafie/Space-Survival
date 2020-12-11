@@ -18,8 +18,12 @@ namespace GameFinalProject
         private Song song;
         private Texture2D background;
         private Vector2 backgroundPosition = new Vector2(0,0);
+
         private Alien alien;
-        private Vector2 speed = new Vector2(4, 4);
+        private Vector2 alienSpeed = new Vector2(2, 2);
+        private Vector2 alienPosition = new Vector2(2, 2);
+
+        private Astronaut astronaut;
 
         public PlayScene(Game game, SpriteBatch spriteBatch, Song song, Texture2D background) : base(game)
         {
@@ -27,8 +31,12 @@ namespace GameFinalProject
             this.song = song;   
             MediaPlayer.IsRepeating = true;
             this.background = background;
-            alien = new Alien(game, spriteBatch, game.Content.Load<Texture2D>("Images/Alien"), Vector2.Zero, 1);
+
+            alien = new Alien(game, spriteBatch, game.Content.Load<Texture2D>("Images/Alien"), alienPosition, alienSpeed, 3);
             this.Components.Add(alien);
+
+            astronaut = new Astronaut(game, spriteBatch, game.Content.Load<Texture2D>("Images/Astronaut"), 3);
+            this.Components.Add(astronaut);
         }
 
         public override void Draw(GameTime gameTime)
@@ -44,9 +52,6 @@ namespace GameFinalProject
 
         public override void Update(GameTime gameTime)
         {
-            alien.Position += speed;
-            alien.start();
-
             base.Update(gameTime);
         }
     }

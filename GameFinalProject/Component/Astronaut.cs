@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 
 namespace GameFinalProject.Component
 {
-    public class Alien : DrawableGameComponent
+    public class Astronaut : DrawableGameComponent
     {
         private SpriteBatch spriteBatch;
-        private Texture2D alien;
+        private Texture2D tex;
         private Vector2 position;
         private Vector2 speed;
-        private Vector2 dimension;
         private List<Rectangle> frames;
         private int frameIndex = -1;
         private int delay;
@@ -24,27 +23,20 @@ namespace GameFinalProject.Component
         private const int WIDTH = 128;
         private const int HEIGHT = 128;
 
-        private const int ROW = 5;
-        private const int COL = 5;
-
         public Vector2 Position { get => position; set => position = value; }
-        public Vector2 Speed { get => speed; set => speed = value; }
 
-        public Alien(Game game,
-            SpriteBatch spriteBatch,
-            Texture2D alien,
-            Vector2 position,
-            Vector2 speed,
-            int delay) : base(game)
+        public Astronaut(Game game,
+                SpriteBatch spriteBatch,
+                Texture2D tex,
+                int delay) : base(game)
         {
             this.spriteBatch = spriteBatch;
-            this.alien = alien;
-            this.position = position;
-            this.speed = speed;
+            this.tex = tex;
+            position = new Vector2(Shared.stage.X / 2 - WIDTH / 2, Shared.stage.Y - HEIGHT);
+            speed = new Vector2(5, 0);
             this.delay = delay;
 
-            dimension = new Vector2(alien.Width / COL, alien.Height / ROW);
-
+            // dimension = new Vector2(WIDTH, HEIGHT);
             //hide();
             createFrames();
         }
@@ -53,8 +45,8 @@ namespace GameFinalProject.Component
         {
             this.Enabled = false;
             this.Visible = false;
-
         }
+
         public void start()
         {
             this.Enabled = true;
@@ -65,14 +57,13 @@ namespace GameFinalProject.Component
         private void createFrames()
         {
             frames = new List<Rectangle>();
-            for (int i = 0; i < ROW; i++)
+            for (int i = 0; i < tex.Height / HEIGHT; i++)
             {
-                for (int j = 0; j < COL; j++)
+                for (int j = 0; j < tex.Width / WIDTH; j++)
                 {
-                    int x = j * (int)dimension.X;
-                    int y = i * (int)dimension.Y;
-
-                    Rectangle r = new Rectangle(x, y, (int)dimension.X, (int)dimension.Y);
+                    int x = j * WIDTH;
+                    int y = i * HEIGHT;
+                    Rectangle r = new Rectangle(x, y, WIDTH, HEIGHT);
                     frames.Add(r);
                 }
             }
@@ -84,27 +75,46 @@ namespace GameFinalProject.Component
 
             if (frameIndex >= 0)
             {
-                spriteBatch.Draw(alien, Position, frames[frameIndex], Color.White);
+                spriteBatch.Draw(tex, Position, frames[frameIndex], Color.White);
             }
 
             spriteBatch.End();
             base.Draw(gameTime);
         }
-
         public override void Update(GameTime gameTime)
         {
             delayCounter++;
             if (delayCounter > delay)
             {
                 frameIndex++;
-                if (frameIndex > alien.Height / HEIGHT * alien.Width / WIDTH - 1)
+                if (frameIndex > tex.Height / HEIGHT * tex.Width / WIDTH - 1)
                 {
                     frameIndex = -1;
+                    //hide();
                 }
                 delayCounter = 0;
             }
-            position += speed;
+
+            KeyboardState ks = Keyboard.GetState();
+            if (ks.IsKeyDown(Keys.Right))
+            {
+                position += speed;
+                if (position.X > Shared.stage.X - WIDTH)
+                {
+                    position.X = Shared.stage.X - WIDTH;
+                }
+            }
+            if (ks.IsKeyDown(Keys.Left))
+            {
+                position -= speed;
+                if (position.X < 0)
+                {
+                    position.X = 0;
+                }
+            }
+
             base.Update(gameTime);
         }
+
     }
 }
