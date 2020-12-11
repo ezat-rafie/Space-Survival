@@ -177,3 +177,5 @@ C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\obj\x86\Debug\Ga
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\obj\x86\Debug\GameFinalProject.pdb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\SpaceBackground.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\newbg.xnb
+C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\newbg.xnb
+C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\SpaceBackground.xnb

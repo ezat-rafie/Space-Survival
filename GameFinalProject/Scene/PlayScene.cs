@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using GameFinalProject.Component;
+using AnimationExplosion;
 
 namespace GameFinalProject
 {
@@ -19,9 +20,11 @@ namespace GameFinalProject
         private Texture2D background;
         private Vector2 backgroundPosition = new Vector2(0,-400);
 
+        //Alien
         private Alien alien;
         private Vector2 alienSpeed = new Vector2(2, 2);
 
+        //Astronaut
         private Astronaut astronaut;
         private Vector2 alienPosition = new Vector2(2, 2);
 
@@ -35,6 +38,10 @@ namespace GameFinalProject
         private int delayCounter;
         private int timer;
 
+        //Mouse click explosion
+        private Explosion explosion;
+        private MouseState oldState;
+
 
         public PlayScene(Game game, SpriteBatch spriteBatch, Song song, Texture2D background) : base(game)
         {
@@ -43,11 +50,18 @@ namespace GameFinalProject
             MediaPlayer.IsRepeating = true;
             this.background = background;
 
+            //Alien
             alien = new Alien(game, spriteBatch, game.Content.Load<Texture2D>("Images/Alien"), alienPosition, alienSpeed, 3);
             this.Components.Add(alien);
 
+            //Astronaut
             astronaut = new Astronaut(game, spriteBatch, game.Content.Load<Texture2D>("Images/Astronaut"), 3);
             this.Components.Add(astronaut);
+
+            //Mouse click explosion
+            Texture2D tex = game.Content.Load<Texture2D>("Images/explosion");
+            explosion = new Explosion(game, spriteBatch, tex, Vector2.Zero, 3);
+            this.Components.Add(explosion);
 
             // getting mouse position practice
             font = game.Content.Load<SpriteFont>("Fonts/RegularFont");
@@ -74,6 +88,16 @@ namespace GameFinalProject
 
         public override void Update(GameTime gameTime)
         {
+            //mouseClick explosion
+            MouseState ms = Mouse.GetState();
+
+            if (ms.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
+            {
+                explosion.Position = new Vector2(ms.X-55, ms.Y-55);
+                explosion.start();
+            }
+            oldState = ms;
+
             delayCounter++;
             if (delayCounter > delay)
             {
@@ -82,7 +106,7 @@ namespace GameFinalProject
             }
 
             // Update mouse info
-            MouseState ms = Mouse.GetState();
+            ms = Mouse.GetState();
             string msg = $"MOUSE POSITION : {ms.X} , {ms.Y}";
             Vector2 dimension = font.MeasureString(msg);
             Vector2 strPos = new Vector2(Shared.stage.X - dimension.X,
