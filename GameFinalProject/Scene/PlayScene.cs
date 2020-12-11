@@ -25,6 +25,20 @@ namespace GameFinalProject
         private Vector2 alienSpeed = new Vector2(1, 1);
         private Vector2 alienPosition = new Vector2(2, 2);
 
+        //Multiple aliens
+        Alien[] aliens;
+        Random random = new Random();
+        private int maxAlien = 8;
+        private int minAlien = 1;
+
+        private int minAlienPositionX = 0;
+        private int maxAlienPositionX = 1000;
+        private int minAlienPositionY = 0;
+        private int maxAlienPositionY = 200;
+
+        private int minAlienSpeed = 1;
+        private int maxAlienSpeed = 4;
+
         //Astronaut
         private Astronaut astronaut;
 
@@ -59,6 +73,16 @@ namespace GameFinalProject
             //Alien
             alien = new Alien(game, spriteBatch, game.Content.Load<Texture2D>("Images/Alien"), alienPosition, alienSpeed, 3);
             this.Components.Add(alien);
+
+            //aliens
+            aliens = new Alien[maxAlien];
+            for (int i = 0; i < maxAlien; i++)
+            {
+                Vector2 randAlienPosition = new Vector2(random.Next(minAlienPositionX, maxAlienPositionX), random.Next(minAlienPositionY, maxAlienPositionY));
+                Vector2 randAlienSpeed = new Vector2(random.Next(minAlienSpeed, maxAlienSpeed), random.Next(minAlienSpeed, maxAlienSpeed));
+                aliens[i] = new Alien(game, spriteBatch, game.Content.Load<Texture2D>("Images/Alien"), randAlienPosition, randAlienSpeed, 3);
+                this.Components.Add(aliens[i]);
+            }
 
             //Astronaut
             astronaut = new Astronaut(game, spriteBatch, game.Content.Load<Texture2D>("Images/Astronaut"), 3);
