@@ -42,6 +42,8 @@ namespace GameFinalProject
         private Explosion explosion;
         private MouseState oldState;
 
+        //Rocket
+        private Rocket rocket;
 
         public PlayScene(Game game, SpriteBatch spriteBatch, Song song, Texture2D background) : base(game)
         {
@@ -49,6 +51,10 @@ namespace GameFinalProject
             this.song = song;   
             MediaPlayer.IsRepeating = true;
             this.background = background;
+
+            // Rocket
+            rocket = new Rocket(game, spriteBatch);
+            this.Components.Add(rocket);
 
             //Alien
             alien = new Alien(game, spriteBatch, game.Content.Load<Texture2D>("Images/Alien"), alienPosition, alienSpeed, 3);
