@@ -21,6 +21,7 @@ namespace GameFinalProject
         private Vector2 position = new Vector2(0,0);
 
 
+
         private string[] menuArray = { "Play Game", "Help", "High Score", "About", "Exit" };
         public MenuComponent Menu { get => menu; set => menu = value; }
         public StartScene(Game game, SpriteBatch spriteBatch, Song song, SoundEffect click, Texture2D background) : base(game)
@@ -45,6 +46,11 @@ namespace GameFinalProject
             spriteBatch.End();
             
             base.Draw(gameTime);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
         }
     }
 }

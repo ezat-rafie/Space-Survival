@@ -32,14 +32,15 @@ namespace GameFinalProject
             SpriteBatch spriteBatch,
             SpriteFont regularFont,
             SpriteFont highlightFont,
-            string[] menu, SoundEffect click) : base(game)
+            string[] menu,
+            SoundEffect click) : base(game)
         {
             this.spriteBatch = spriteBatch;
             this.regularFont = regularFont;
             this.highlightFont = highlightFont;
             menuArray = menu;
-            position = new Vector2(Shared.stage.X * 3 / 4, Shared.stage.Y / 2);
             this.click = click;
+            position = new Vector2(Shared.stage.X * 3 / 4, Shared.stage.Y / 2);
         }
 
         

@@ -21,9 +21,20 @@ namespace GameFinalProject
 
         private Alien alien;
         private Vector2 alienSpeed = new Vector2(2, 2);
-        private Vector2 alienPosition = new Vector2(2, 2);
 
         private Astronaut astronaut;
+        private Vector2 alienPosition = new Vector2(2, 2);
+
+        // add string components
+        StringComponent msInfo;
+        StringComponent scoreInfo;
+        SpriteFont font;
+
+        // timer role
+        private int delay = 60;
+        private int delayCounter;
+        private int timer;
+
 
         public PlayScene(Game game, SpriteBatch spriteBatch, Song song, Texture2D background) : base(game)
         {
@@ -37,6 +48,17 @@ namespace GameFinalProject
 
             astronaut = new Astronaut(game, spriteBatch, game.Content.Load<Texture2D>("Images/Astronaut"), 3);
             this.Components.Add(astronaut);
+
+            // getting mouse position practice
+            font = game.Content.Load<SpriteFont>("Fonts/RegularFont");
+            string msg = "TEST";
+            msInfo = new StringComponent(game, spriteBatch, font, Vector2.Zero, msg, Color.AliceBlue);
+            this.Components.Add(msInfo);
+
+            // Point
+            string score = "SCORE : ";
+            scoreInfo = new StringComponent(game, spriteBatch, font, Vector2.Zero, score, Color.AliceBlue);
+            this.Components.Add(scoreInfo);
         }
 
         public override void Draw(GameTime gameTime)
@@ -52,6 +74,25 @@ namespace GameFinalProject
 
         public override void Update(GameTime gameTime)
         {
+            delayCounter++;
+            if (delayCounter > delay)
+            {
+                timer = timer + 1;
+                delayCounter = 0;
+            }
+
+            // Update mouse info
+            MouseState ms = Mouse.GetState();
+            string msg = $"MOUSE POSITION : {ms.X} , {ms.Y}";
+            Vector2 dimension = font.MeasureString(msg);
+            Vector2 strPos = new Vector2(Shared.stage.X - dimension.X,
+                Shared.stage.Y - dimension.Y);
+            msInfo.Position = strPos;
+            msInfo.Message = msg;
+
+            // Update score info
+            string score = $"SCORE : {timer}";
+            scoreInfo.Message = score;
             base.Update(gameTime);
         }
     }

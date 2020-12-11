@@ -62,7 +62,6 @@ namespace GameFinalProject
         {
             // TODO: Add your initialization logic here
             Shared.stage = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-
             base.Initialize();
         }
         
