@@ -42,11 +42,14 @@ namespace GameFinalProject
         // soundEffect
         private SoundEffect click;
 
+        // Graphics
+
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            IsMouseVisible = true;
         }
 
         /// <summary>
@@ -111,11 +114,15 @@ namespace GameFinalProject
             backgroundMusic = Content.Load<Song>("Sounds/BackgroundMusic");
             click = Content.Load<SoundEffect>("Sounds/Click");
 
+            //Graphics
+            Texture2D menuBackground = this.Content.Load<Texture2D>("Images/Menu");
+            Texture2D gameBackground = this.Content.Load<Texture2D>("Images/GameBackground");
+
             // Instantiate all scenes
-            startScene = new StartScene(this, spriteBatch, startMusic, click);
+            startScene = new StartScene(this, spriteBatch, startMusic, click, menuBackground);
             this.Components.Add(startScene);
             
-            playScene = new PlayScene(this, spriteBatch, backgroundMusic);
+            playScene = new PlayScene(this, spriteBatch, backgroundMusic, gameBackground);
             this.Components.Add(playScene);
 
             helpScene = new HelpScene(this, spriteBatch);
@@ -124,7 +131,7 @@ namespace GameFinalProject
             highScoreScene = new HighScoreScene(this, spriteBatch);
             this.Components.Add(highScoreScene);
 
-            aboutScene = new AboutScene(this, spriteBatch);
+            aboutScene = new AboutScene(this, spriteBatch, menuBackground);
             this.Components.Add(aboutScene);
 
             // Show only startScene and play start music
@@ -142,6 +149,7 @@ namespace GameFinalProject
         {
             // TODO: Unload any non ContentManager content here
             //* tbh I don't know what these mean but somebody in stackoverflow wrote these so just followed
+            // ! Comment to be deleted
             if (startMusic != null)
             {
                 startMusic.Dispose();

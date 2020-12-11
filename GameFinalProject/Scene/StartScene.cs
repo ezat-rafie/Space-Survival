@@ -17,10 +17,13 @@ namespace GameFinalProject
         private MenuComponent menu;
         private Song song;
         private SoundEffect click;
+        private Texture2D background;
+        private Vector2 position = new Vector2(0,0);
+
 
         private string[] menuArray = { "Play Game", "Help", "High Score", "About", "Exit" };
         public MenuComponent Menu { get => menu; set => menu = value; }
-        public StartScene(Game game, SpriteBatch spriteBatch, Song song, SoundEffect click) : base(game)
+        public StartScene(Game game, SpriteBatch spriteBatch, Song song, SoundEffect click, Texture2D background) : base(game)
         {
             this.spriteBatch = spriteBatch;
             menu = new MenuComponent(game,
@@ -32,8 +35,16 @@ namespace GameFinalProject
             this.song = song;
             MediaPlayer.IsRepeating = true;
             this.click = click;
+            this.background = background;
         }
 
-        
+        public override void Draw(GameTime gameTime)
+        {
+            spriteBatch.Begin();
+            spriteBatch.Draw(background, position, Color.White);
+            spriteBatch.End();
+            
+            base.Draw(gameTime);
+        }
     }
 }

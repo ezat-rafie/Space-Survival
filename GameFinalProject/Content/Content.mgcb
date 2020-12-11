@@ -34,18 +34,6 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/SpecialFont.spritefont
 
-#begin Images/Alien World Background.jpg
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Alien World Background.jpg
-
 #begin Images/Alien.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -82,6 +70,18 @@
 /processorParam:TextureFormat=Color
 /build:Images/Explosion.png
 
+#begin Images/GameBackground.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/GameBackground.jpg
+
 #begin Images/Icon.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -93,6 +93,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/Icon.png
+
+#begin Images/Menu.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/Menu.jpg
 
 #begin Images/Rocket.png
 /importer:TextureImporter

@@ -13,13 +13,26 @@ namespace GameFinalProject
     {
         private SpriteBatch spriteBatch;
         private AboutComponent aboutComponent;
-        public AboutScene(Game game, SpriteBatch spriteBatch) : base(game)
+        private Texture2D menuBackground;
+        private Vector2 position = new Vector2(0, 0);
+        public AboutScene(Game game, 
+            SpriteBatch spriteBatch,
+            Texture2D menuBackground) : base(game)
         {
             this.spriteBatch = spriteBatch;
+            this.menuBackground = menuBackground;
             aboutComponent = new AboutComponent(game, spriteBatch,
                                 game.Content.Load<SpriteFont>("Fonts/RegularFont"),
                                 game.Content.Load<SpriteFont>("Fonts/SpecialFont"));
             this.Components.Add(aboutComponent);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            spriteBatch.Begin();
+            spriteBatch.Draw(menuBackground, position, Color.White);
+            spriteBatch.End();
+            base.Draw(gameTime);
         }
     }
 }

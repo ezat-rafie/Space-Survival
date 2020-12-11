@@ -16,7 +16,7 @@ namespace GameFinalProject
         private SpriteBatch spriteBatch;
         
         private SpriteFont regularFont, highlightFont;
-        private Color regularColor = Color.DarkSlateGray;
+        private Color regularColor = Color.White;
         private Color highlightColor = Color.Firebrick;
 
         private string[] menuArray;

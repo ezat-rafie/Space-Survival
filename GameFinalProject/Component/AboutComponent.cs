@@ -16,7 +16,7 @@ namespace GameFinalProject
 
         private SpriteFont regularFont, specialFont;
         private Color regularColor = Color.DarkSlateGray;
-        private Color specialColor = Color.Purple;
+        private Color specialColor = Color.White;
 
         private Vector2 posTitle = new Vector2(Shared.stage.X / 5, Shared.stage.Y / 4);
         private Vector2 posContent = new Vector2(Shared.stage.X / 5, Shared.stage.Y * 3 / 5);
