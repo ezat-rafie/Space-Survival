@@ -21,8 +21,8 @@ namespace GameFinalProject
         private int delay;
         private int delayCounter;
 
-        private const int WIDTH = 128;
-        private const int HEIGHT = 128;
+        //private const int WIDTH = 128;
+        //private const int HEIGHT = 128;
 
         private const int ROW = 5;
         private const int COL = 5;
@@ -93,7 +93,7 @@ namespace GameFinalProject
             if (delayCounter > delay)
             {
                 frameIndex++;
-                if (frameIndex > alien.Height / HEIGHT * alien.Width / WIDTH - 1)
+                if (frameIndex > ROW * COL - 1)
                 {
                     frameIndex = -1;
                 }
@@ -105,7 +105,7 @@ namespace GameFinalProject
             {
                 speed.X = -speed.X;
             }
-            if (position.X + WIDTH > Shared.stage.X)
+            if (position.X + alien.Width / COL > Shared.stage.X)
             {
                 speed.X = -speed.X;
             }
@@ -115,7 +115,7 @@ namespace GameFinalProject
         }
         public Rectangle GetBound()
         {
-            return new Rectangle((int)position.X, (int)position.Y, WIDTH, HEIGHT);
+            return new Rectangle((int)position.X, (int)position.Y, alien.Width / COL, alien.Height / ROW);
         }
     }
 }

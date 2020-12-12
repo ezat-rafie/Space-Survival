@@ -31,6 +31,7 @@ namespace GameFinalProject
         private int maxAlien = 8;
         private int minAlien = 1;
         Rectangle alienRect;
+        Rectangle explosionRect;
 
         private int minAlienPositionX = 0;
         private int maxAlienPositionX = 1000;
@@ -79,7 +80,7 @@ namespace GameFinalProject
 
             //Alien
             alien = new Alien(game, spriteBatch, game.Content.Load<Texture2D>("Images/Alien"), 3);
-            this.Components.Add(alien);
+            //this.Components.Add(alien);
 
             //aliens
             aliens = new Alien[maxAlien];
@@ -88,9 +89,6 @@ namespace GameFinalProject
                 aliens[i] = new Alien(game, spriteBatch, game.Content.Load<Texture2D>("Images/Alien"), 3);
                 this.Components.Add(aliens[i]);
             }
-
-            //* =================
-            alienRect = new Rectangle();
 
             //Astronaut
             astronaut = new Astronaut(game, spriteBatch, game.Content.Load<Texture2D>("Images/Astronaut"), 3);
@@ -119,6 +117,7 @@ namespace GameFinalProject
             scoreInfo = new StringComponent(game, spriteBatch, font, Vector2.Zero, score, Color.AliceBlue);
             this.Components.Add(scoreInfo);
             */
+
         }
 
         public override void Draw(GameTime gameTime)
@@ -126,6 +125,7 @@ namespace GameFinalProject
             spriteBatch.Begin();
 
             spriteBatch.Draw(background, backgroundPosition, Color.White);
+            
 
             spriteBatch.End();
 
@@ -174,21 +174,25 @@ namespace GameFinalProject
                 explosion.Position = new Vector2(ms.X-55, ms.Y-55);
                 explosion.start();
                 shootingSound.Play();
-                Rectangle explosionRect = new Rectangle(ms.X - 40, ms.Y - 40, 80, 80);
-
-                foreach (Alien alien in aliens)
-                {
-                    alienRect = alien.GetBound();
-
-                    if (explosionRect.Intersects(alienRect))
-                    {
-                        alien.hide();
-                        alienDying.Play();
-                        break;
-                    }
-                }
+                explosionRect = explosion.getBound();
             }
             oldState = ms;
+
+            foreach (Alien alien in aliens)
+            {
+                alienRect = alien.GetBound();
+
+                if (explosionRect.Intersects(alienRect))
+                {
+                    alien.hide();
+                    alienDying.Play();
+
+                    
+                    alienRect = new Rectangle(0, 0, 0, 0);
+                    explosionRect = Rectangle.Empty;
+                    break;
+                }
+            }
 
             /*
             delayCounter++;
