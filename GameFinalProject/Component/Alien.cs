@@ -115,7 +115,7 @@ namespace GameFinalProject
         }
         public Rectangle GetBound()
         {
-            return new Rectangle((int)position.Y, (int)position.Y, alien.Width, alien.Height);
+            return new Rectangle((int)position.X, (int)position.Y, WIDTH, HEIGHT);
         }
     }
 }
