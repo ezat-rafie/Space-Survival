@@ -276,6 +276,8 @@ namespace GameFinalProject
             totalScore = $"SCORE : {score}";
             scoreInfo.Message = totalScore;
 
+            mouseRect = new Rectangle(0, 0, 0, 0);
+
             // Make it faster~
             if (score > 2000)
             {
