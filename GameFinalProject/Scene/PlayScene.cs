@@ -42,6 +42,7 @@ namespace GameFinalProject
         //Shooting
         private Shooting shooting;
         private SoundEffect alienDying;
+        Rectangle mouseRect;
 
         //Astronaut
         private Astronaut astronaut;
@@ -185,7 +186,6 @@ namespace GameFinalProject
 
             //mouseClick explosion
             MouseState ms = Mouse.GetState();
-
             if (ms.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
             {
                 explosion.Position = new Vector2(ms.X-55, ms.Y-55);
@@ -197,6 +197,7 @@ namespace GameFinalProject
 
                 shootingSound.Play();
                 explosionRect = explosion.getBound();
+                mouseRect = new Rectangle(ms.X - 5, ms.Y - 5, 10, 10);
             }
             oldState = ms;
 
@@ -205,24 +206,13 @@ namespace GameFinalProject
             {
                 alienRect = alien.GetBound();
                 overlapDie = new Rectangle();
-                overlapKill = new Rectangle();
+                //overlapKill = new Rectangle();
                 overlapDie = Rectangle.Intersect(alienRect, astronautRect);
-                overlapKill = Rectangle.Intersect(alienRect, explosionRect);
+                //overlapKill = Rectangle.Intersect(alienRect, explosionRect);
                 int overlapDieDim = overlapDie.Width * overlapDie.Height;
-                int overlapKillDim = overlapKill.Width * overlapKill.Height;
+                //int overlapKillDim = overlapKill.Width * overlapKill.Height;
 
-                if (overlapKillDim > 1000 && alien.IsAlive)
-                {
-                    alien.Speed += alien.Speed * 10;
-                    alien.hide();
-                    alienDying.Play();
-                    alienRect = Rectangle.Empty;
-                    explosionRect = Rectangle.Empty;
-                    alien.IsAlive = false;
-                    score += 100;
-                    break;
-                }
-                //if (explosionRect.Intersects(alienRect))
+                //if (overlapKillDim > 800 && alien.IsAlive)
                 //{
                 //    alien.Speed += alien.Speed * 10;
                 //    alien.hide();
@@ -233,6 +223,21 @@ namespace GameFinalProject
                 //    score += 100;
                 //    break;
                 //}
+
+                // used mouseRect instead of explosionRect
+                // for better targeting
+                if (mouseRect.Intersects(alienRect))
+                {
+                    alien.Speed += alien.Speed * 10;
+                    alien.hide();
+                    alienDying.Play();
+                    alienRect = Rectangle.Empty;
+                    explosionRect = Rectangle.Empty;
+                    mouseRect = new Rectangle(0, 0, 0, 0);
+                    alien.IsAlive = false;
+                    score += 100;
+                    break;
+                }
                 if (overlapDieDim > 1500 && alien.IsAlive)
                 {
                     MessageBox.Show("Game Over", $"You died! Score : {score}", new[] { "New Game", "Main Page", "Exit" });
