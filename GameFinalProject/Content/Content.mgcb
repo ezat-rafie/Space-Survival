@@ -130,18 +130,6 @@
 /processorParam:TextureFormat=Color
 /build:Images/Rocket.png
 
-#begin Images/SpaceBackground.jpg
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/SpaceBackground.jpg
-
 #begin Images/SpaceShip Explosion.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -153,6 +141,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/SpaceShip Explosion.png
+
+#begin Sounds/alienDye.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/alienDye.mp3
 
 #begin Sounds/BackgroundMusic.mp3
 /importer:Mp3Importer

@@ -20,7 +20,6 @@ namespace GameFinalProject.Component
         private int frameIndex = -1;
         private int delay;
         private int delayCounter;
-        public bool alive;
 
         private const int WIDTH = 128;
         private const int HEIGHT = 128;
@@ -43,7 +42,6 @@ namespace GameFinalProject.Component
             this.position = position;
             this.speed = speed;
             this.delay = delay;
-            this.alive = true;
 
             dimension = new Vector2(alien.Width / COL, alien.Height / ROW);
 
@@ -107,6 +105,10 @@ namespace GameFinalProject.Component
             }
             position += speed;
             base.Update(gameTime);
+        }
+        public Rectangle GetBound()
+        {
+            return new Rectangle((int)position.Y, (int)position.Y, alien.Width, alien.Height);
         }
     }
 }

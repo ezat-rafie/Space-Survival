@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -19,6 +20,7 @@ namespace AnimationExplosion
         private int frameIndex = -1;
         private int delay;
         private int delayCounter;
+        private SoundEffect shootingSound;
 
         private const int ROW = 4;
         private const int COL = 4;
@@ -29,12 +31,14 @@ namespace AnimationExplosion
             SpriteBatch spriteBatch,
             Texture2D tex,
             Vector2 position,
+            SoundEffect shootingSound,
             int delay) : base(game)
         {
             this.spriteBatch = spriteBatch;
             this.tex = tex;
             this.position = position;
             this.delay = delay;
+            this.shootingSound = shootingSound;
 
             dimension = new Vector2(tex.Width / COL, tex.Height / ROW);
 
@@ -98,6 +102,11 @@ namespace AnimationExplosion
                 delayCounter = 0;
             }
             base.Update(gameTime);
+        }
+
+        public Rectangle getBound()
+        {
+            return new Rectangle((int)position.X, (int)position.Y, tex.Width, tex.Height);
         }
     }
 }

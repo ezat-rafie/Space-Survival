@@ -33,11 +33,15 @@ namespace GameFinalProject
 
         private int minAlienPositionX = 0;
         private int maxAlienPositionX = 1000;
-        private int minAlienPositionY = 0;
+        private int minAlienPositionY = -1500;
         private int maxAlienPositionY = 200;
 
         private int minAlienSpeed = 1;
-        private int maxAlienSpeed = 4;
+        private int maxAlienSpeed = 3;
+
+        //Shooting
+        private Shooting shooting;
+        SoundEffect alienDying;
 
         //Astronaut
         private Astronaut astronaut;
@@ -55,6 +59,8 @@ namespace GameFinalProject
         //Mouse click explosion
         private Explosion explosion;
         private MouseState oldState;
+        private SoundEffect shootingSound;
+        private Texture2D explosionSprite;
 
         //Rocket
         private Rocket rocket;
@@ -89,9 +95,15 @@ namespace GameFinalProject
             this.Components.Add(astronaut);
 
             //Mouse click explosion
-            Texture2D tex = game.Content.Load<Texture2D>("Images/explosion");
-            explosion = new Explosion(game, spriteBatch, tex, Vector2.Zero, 3);
+            explosionSprite = game.Content.Load<Texture2D>("Images/explosion");
+            shootingSound = game.Content.Load<SoundEffect>("Sounds/Explosion");
+            explosion = new Explosion(game, spriteBatch, explosionSprite, Vector2.Zero,shootingSound, 3);
             this.Components.Add(explosion);
+
+            //Shooting
+            alienDying = game.Content.Load<SoundEffect>("Sounds/alienDye");
+            shooting = new Shooting(game, alien, explosion, alienDying);
+            this.Components.Add(shooting);
 
             // getting mouse position practice
             font = game.Content.Load<SpriteFont>("Fonts/RegularFont");
@@ -118,9 +130,12 @@ namespace GameFinalProject
 
         public override void Update(GameTime gameTime)
         {
-            Vector2 direction = astronaut.Position - alien.Position;
-            direction.Normalize();
-            alien.Position += direction * alien.Speed;
+            foreach (Alien alien in aliens)
+            {
+                Vector2 direction = astronaut.Position - alien.Position;
+                direction.Normalize();
+                alien.Position += direction * alien.Speed;
+            }
             //mouseClick explosion
             MouseState ms = Mouse.GetState();
 
@@ -128,6 +143,7 @@ namespace GameFinalProject
             {
                 explosion.Position = new Vector2(ms.X-55, ms.Y-55);
                 explosion.start();
+                shootingSound.Play();
             }
             oldState = ms;
 
