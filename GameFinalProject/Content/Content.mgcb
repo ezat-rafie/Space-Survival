@@ -142,11 +142,11 @@
 /processorParam:TextureFormat=Color
 /build:Images/SpaceShip Explosion.png
 
-#begin Sounds/alienDye.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
+#begin Sounds/alienDying.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/alienDye.mp3
+/build:Sounds/alienDying.wav
 
 #begin Sounds/BackgroundMusic.mp3
 /importer:Mp3Importer

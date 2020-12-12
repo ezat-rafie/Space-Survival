@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameFinalProject.Component
+namespace GameFinalProject
 {
     public class Alien : DrawableGameComponent
     {
@@ -33,19 +33,15 @@ namespace GameFinalProject.Component
         public Alien(Game game,
             SpriteBatch spriteBatch,
             Texture2D alien,
-            Vector2 position,
-            Vector2 speed,
             int delay) : base(game)
         {
             this.spriteBatch = spriteBatch;
             this.alien = alien;
-            this.position = position;
-            this.speed = speed;
             this.delay = delay;
 
             dimension = new Vector2(alien.Width / COL, alien.Height / ROW);
 
-            //hide();
+            hide();
             createFrames();
         }
 
@@ -104,7 +100,18 @@ namespace GameFinalProject.Component
                 delayCounter = 0;
             }
             position += speed;
+
+            if (position.X < 0)
+            {
+                speed.X = -speed.X;
+            }
+            if (position.X + WIDTH > Shared.stage.X)
+            {
+                speed.X = -speed.X;
+            }
+
             base.Update(gameTime);
+
         }
         public Rectangle GetBound()
         {

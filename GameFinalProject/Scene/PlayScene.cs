@@ -30,18 +30,19 @@ namespace GameFinalProject
         Random random = new Random();
         private int maxAlien = 8;
         private int minAlien = 1;
+        Rectangle[] alienRect;
 
         private int minAlienPositionX = 0;
         private int maxAlienPositionX = 1000;
-        private int minAlienPositionY = -1500;
-        private int maxAlienPositionY = 200;
+        //private int minAlienPositionY = -1500;
+        //private int maxAlienPositionY = 200;
 
         private int minAlienSpeed = 1;
         private int maxAlienSpeed = 3;
-
+        
         //Shooting
         private Shooting shooting;
-        SoundEffect alienDying;
+        private SoundEffect alienDying;
 
         //Astronaut
         private Astronaut astronaut;
@@ -52,7 +53,7 @@ namespace GameFinalProject
         SpriteFont font;
 
         // timer role
-        private int delay = 60;
+        private int delay = 100;
         private int delayCounter;
         private int timer;
 
@@ -77,18 +78,18 @@ namespace GameFinalProject
             this.Components.Add(rocket);
 
             //Alien
-            alien = new Alien(game, spriteBatch, game.Content.Load<Texture2D>("Images/Alien"), alienPosition, alienSpeed, 3);
+            alien = new Alien(game, spriteBatch, game.Content.Load<Texture2D>("Images/Alien"), 3);
             this.Components.Add(alien);
 
             //aliens
             aliens = new Alien[maxAlien];
             for (int i = 0; i < maxAlien; i++)
             {
-                Vector2 randAlienPosition = new Vector2(random.Next(minAlienPositionX, maxAlienPositionX), random.Next(minAlienPositionY, maxAlienPositionY));
-                Vector2 randAlienSpeed = new Vector2(random.Next(minAlienSpeed, maxAlienSpeed), random.Next(minAlienSpeed, maxAlienSpeed));
-                aliens[i] = new Alien(game, spriteBatch, game.Content.Load<Texture2D>("Images/Alien"), randAlienPosition, randAlienSpeed, 3);
+                aliens[i] = new Alien(game, spriteBatch, game.Content.Load<Texture2D>("Images/Alien"), 3);
                 this.Components.Add(aliens[i]);
             }
+
+            alienRect = new Rectangle[aliens.Length];
 
             //Astronaut
             astronaut = new Astronaut(game, spriteBatch, game.Content.Load<Texture2D>("Images/Astronaut"), 3);
@@ -101,10 +102,11 @@ namespace GameFinalProject
             this.Components.Add(explosion);
 
             //Shooting
-            alienDying = game.Content.Load<SoundEffect>("Sounds/alienDye");
-            shooting = new Shooting(game, alien, explosion, alienDying);
+            alienDying = game.Content.Load<SoundEffect>("Sounds/alienDying");
+            shooting = new Shooting(game, alien, explosion);
             this.Components.Add(shooting);
 
+            /*
             // getting mouse position practice
             font = game.Content.Load<SpriteFont>("Fonts/RegularFont");
             string msg = "TEST";
@@ -115,6 +117,7 @@ namespace GameFinalProject
             string score = "SCORE : ";
             scoreInfo = new StringComponent(game, spriteBatch, font, Vector2.Zero, score, Color.AliceBlue);
             this.Components.Add(scoreInfo);
+            */
         }
 
         public override void Draw(GameTime gameTime)
@@ -128,14 +131,35 @@ namespace GameFinalProject
             base.Draw(gameTime);
         }
 
+        int i = 0;
+        int j = 0;
         public override void Update(GameTime gameTime)
         {
-            foreach (Alien alien in aliens)
+            
+            if ((i > delay && j < aliens.Length) || (i == 0))
             {
-                Vector2 direction = astronaut.Position - alien.Position;
+                Vector2 randAlienPosition = new Vector2(random.Next(minAlienPositionX, maxAlienPositionX), 0);
+                Vector2 randAlienSpeed = new Vector2(random.Next(minAlienSpeed, maxAlienSpeed), random.Next(minAlienSpeed, maxAlienSpeed));
+                aliens[j].Position = randAlienPosition;
+                aliens[j].Speed = randAlienSpeed;
+
+                Vector2 direction = astronaut.Position - aliens[j].Position;
                 direction.Normalize();
-                alien.Position += direction * alien.Speed;
+                aliens[j].Position += direction * aliens[j].Speed;
+                aliens[j].start();
+                i = 0;
+                if (j == aliens.Length -1 )
+                {
+                    j = 0;
+                }
             }
+            i++;
+
+            // GetBound and update direction here
+            //foreach (Alien alien in aliens)
+            //{
+            //}
+            
             //mouseClick explosion
             MouseState ms = Mouse.GetState();
 
@@ -144,9 +168,23 @@ namespace GameFinalProject
                 explosion.Position = new Vector2(ms.X-55, ms.Y-55);
                 explosion.start();
                 shootingSound.Play();
+                Rectangle explosionRect = new Rectangle(ms.X - 40, ms.Y - 40, 80, 80);
+
+                for (int i = 0; i < aliens.Length; i++)
+                {
+                    alienRect[i] = aliens[i].GetBound();
+
+                    if (explosionRect.Intersects(alienRect[i]))
+                    {
+                        aliens[i].hide();
+                        alienDying.Play();
+                        break;
+                    }
+                }
             }
             oldState = ms;
 
+            /*
             delayCounter++;
             if (delayCounter > delay)
             {
@@ -162,10 +200,12 @@ namespace GameFinalProject
                 Shared.stage.Y - dimension.Y);
             msInfo.Position = strPos;
             msInfo.Message = msg;
-
+            
             // Update score info
             string score = $"SCORE : {timer}";
             scoreInfo.Message = score;
+            */
+
             base.Update(gameTime);
         }
     }

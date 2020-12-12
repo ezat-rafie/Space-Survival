@@ -9,33 +9,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameFinalProject.Component
+namespace GameFinalProject
 {
-    class Shooting : GameComponent
+    public class Shooting : GameComponent
     {
         private Alien alien;
         private Explosion explosion;
-        private SoundEffect shootingSound;
+        private SoundEffect ShootingSound { get; set; }
+
         public Shooting(Game game,
             Alien alien,
-            Explosion explosion,
-            SoundEffect dyingSound) : base(game)
+            Explosion explosion) : base(game)
         {
             this.alien = alien;
             this.explosion = explosion;
-            this.shootingSound = dyingSound;
         }
+
 
         public override void Update(GameTime gameTime)
         {
-            Rectangle alienRect = alien.GetBound();
-            Rectangle explosionRect = explosion.getBound();
+            //Rectangle alienRect = alien.GetBound();
+            //Rectangle explosionRect = explosion.getBound();
 
-            if (explosionRect.Intersects(alienRect))
-            {
-                alien.hide();
-                shootingSound.Play();
-            }
+            //if (explosionRect.Intersects(alienRect))
+            //{
+            //    alien.hide();
+            //    ShootingSound.Play();
+            //}
             base.Update(gameTime);
         }
     }
