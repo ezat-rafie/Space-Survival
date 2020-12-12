@@ -40,7 +40,7 @@ namespace GameFinalProject
             this.spriteBatch = spriteBatch;
             this.alien = alien;
             this.delay = delay;
-            this.IsAlive = true;
+            IsAlive = true;
             dimension = new Vector2(alien.Width / COL, alien.Height / ROW);
 
             hide();
@@ -116,7 +116,7 @@ namespace GameFinalProject
         }
         public Rectangle GetBound()
         {
-            return new Rectangle((int)position.X, (int)position.Y, alien.Width / COL, alien.Height / ROW);
+            return new Rectangle((int)position.X + 10, (int)position.Y + 10, alien.Width / COL - 20, alien.Height / ROW - 20);
         }
     }
 }

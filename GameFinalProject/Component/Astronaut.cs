@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameFinalProject.Component
+namespace GameFinalProject
 {
     public class Astronaut : DrawableGameComponent
     {
@@ -118,7 +118,7 @@ namespace GameFinalProject.Component
 
         public Rectangle GetBound()
         {
-            return new Rectangle((int)position.X, (int)position.Y, tex.Width / 5, tex.Height / 5);
+            return new Rectangle((int)position.X + 10, (int)position.Y + 10, tex.Width / 5 - 20, tex.Height / 5 - 20);
         }
 
     }

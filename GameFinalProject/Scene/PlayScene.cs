@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
-using GameFinalProject.Component;
 using AnimationExplosion;
 
 namespace GameFinalProject
@@ -22,18 +21,18 @@ namespace GameFinalProject
 
         //Alien
         private Alien alien;
-        private Vector2 alienSpeed = new Vector2(1, 1);
-        private Vector2 alienPosition = new Vector2(2, 2);
+        //private Vector2 alienSpeed = new Vector2(1, 1);
+        //private Vector2 alienPosition = new Vector2(2, 2);
 
         //Multiple aliens
         Alien[] aliens;
         Random random = new Random();
         private int maxAlien = 8;
-        private int minAlien = 1;
+        //private int minAlien = 1;
         Rectangle alienRect;
 
         private int minAlienPositionX = 0;
-        private int maxAlienPositionX = 1000;
+        private int maxAlienPositionX = 900;
         //private int minAlienPositionY = -1500;
         //private int maxAlienPositionY = 200;
 
@@ -47,16 +46,21 @@ namespace GameFinalProject
         //Astronaut
         private Astronaut astronaut;
         private Rectangle astronautRect;
+        private Rectangle overlapDie;
 
         // add string components
-        StringComponent msInfo;
+        //StringComponent msInfo;
         StringComponent scoreInfo;
+        int score = 0;
+        string totalScore;
         SpriteFont font;
 
-        // timer role
+        // time gap between creating next alien
         private int delay = 100;
-        private int delayCounter;
-        private int timer;
+
+        // timer role (practice)
+        //private int delayCounter;
+        //private int timer;
 
         //Mouse click explosion
         private Explosion explosion;
@@ -64,6 +68,7 @@ namespace GameFinalProject
         private SoundEffect shootingSound;
         private Texture2D explosionSprite;
         Rectangle explosionRect;
+        private Rectangle overlapKill;
 
         //Rocket
         private Rocket rocket;
@@ -105,8 +110,8 @@ namespace GameFinalProject
             this.Components.Add(explosion);
 
             //Laser
-            laser = new Laser(game, spriteBatch, 3);
-            this.Components.Add(laser);
+            //laser = new Laser(game, spriteBatch, 3);
+            //this.Components.Add(laser);
 
             //Shooting
             alienDying = game.Content.Load<SoundEffect>("Sounds/alienDying");
@@ -120,12 +125,13 @@ namespace GameFinalProject
             msInfo = new StringComponent(game, spriteBatch, font, Vector2.Zero, msg, Color.AliceBlue);
             this.Components.Add(msInfo);
 
-            // Point
-            string score = "SCORE : ";
-            scoreInfo = new StringComponent(game, spriteBatch, font, Vector2.Zero, score, Color.AliceBlue);
-            this.Components.Add(scoreInfo);
             */
-
+            // Point
+            font = game.Content.Load<SpriteFont>("Fonts/RegularFont");
+            string totalScore = " ";
+            scoreInfo = new StringComponent(game, spriteBatch, font, Vector2.Zero, totalScore, Color.AliceBlue);
+            this.Components.Add(scoreInfo);
+            
         }
 
         public override void Draw(GameTime gameTime)
@@ -153,6 +159,7 @@ namespace GameFinalProject
                 Vector2 randAlienSpeed = new Vector2(random.Next(minAlienSpeed, maxAlienSpeed), random.Next(minAlienSpeed, maxAlienSpeed));
                 aliens[j].Position = randAlienPosition;
                 aliens[j].Speed = randAlienSpeed;
+                aliens[j].IsAlive = true;
 
                 aliens[j].start();
                 Vector2 direction = astronaut.Position - aliens[j].Position;
@@ -184,9 +191,9 @@ namespace GameFinalProject
                 explosion.Position = new Vector2(ms.X-55, ms.Y-55);
                 explosion.start();
 
-                laser.MousePosition = new Vector2(ms.X, ms.Y);
-                laser.Position = new Vector2(astronaut.Position.X + 64, astronaut.Position.Y + 5);
-                laser.start();
+                //laser.MousePosition = new Vector2(ms.X, ms.Y);
+                //laser.Position = new Vector2(astronaut.Position.X + 64, astronaut.Position.Y + 5);
+                //laser.start();
 
                 shootingSound.Play();
                 explosionRect = explosion.getBound();
@@ -197,8 +204,14 @@ namespace GameFinalProject
             foreach (Alien alien in aliens)
             {
                 alienRect = alien.GetBound();
+                overlapDie = new Rectangle();
+                overlapKill = new Rectangle();
+                overlapDie = Rectangle.Intersect(alienRect, astronautRect);
+                overlapKill = Rectangle.Intersect(alienRect, explosionRect);
+                int overlapDieDim = overlapDie.Width * overlapDie.Height;
+                int overlapKillDim = overlapKill.Width * overlapKill.Height;
 
-                if (explosionRect.Intersects(alienRect))
+                if (overlapKillDim > 1000 && alien.IsAlive)
                 {
                     alien.Speed += alien.Speed * 10;
                     alien.hide();
@@ -206,13 +219,32 @@ namespace GameFinalProject
                     alienRect = Rectangle.Empty;
                     explosionRect = Rectangle.Empty;
                     alien.IsAlive = false;
+                    score += 100;
                     break;
                 }
-                if (astronautRect.Intersects(alienRect) && alien.IsAlive == true)
+                //if (explosionRect.Intersects(alienRect))
+                //{
+                //    alien.Speed += alien.Speed * 10;
+                //    alien.hide();
+                //    alienDying.Play();
+                //    alienRect = Rectangle.Empty;
+                //    explosionRect = Rectangle.Empty;
+                //    alien.IsAlive = false;
+                //    score += 100;
+                //    break;
+                //}
+                if (overlapDieDim > 1500 && alien.IsAlive)
                 {
-                    MessageBox.Show("Game Over", "You died", new[] { "New Game", "Main Page", "Exit" });
+                    MessageBox.Show("Game Over", $"You died! Score : {score}", new[] { "New Game", "Main Page", "Exit" });
                     this.Enabled = false;
                 }
+                //if (astronautRect.Intersects(alienRect) && alien.IsAlive)
+                //{
+                //    MessageBox.Show("Game Over", "You died", new[] { "New Game", "Main Page", "Exit" });
+                //    this.Enabled = false;
+                //}
+
+                
             }
 
 
@@ -233,11 +265,37 @@ namespace GameFinalProject
                 Shared.stage.Y - dimension.Y);
             msInfo.Position = strPos;
             msInfo.Message = msg;
-            
-            // Update score info
-            string score = $"SCORE : {timer}";
-            scoreInfo.Message = score;
             */
+
+            // Update score info
+            totalScore = $"SCORE : {score}";
+            scoreInfo.Message = totalScore;
+
+            // Make it faster~
+            if (score > 2000)
+            {
+                maxAlien = 20;
+                delay = 10;
+                minAlienSpeed = 10;
+                maxAlienSpeed = 12;
+            }
+            else if (score > 800)
+            {
+                minAlienSpeed = 7;
+                maxAlienSpeed = 10;
+            }
+            else if (score > 500)
+            {
+                delay = 50;
+                minAlienSpeed = 5;
+                maxAlienSpeed = 8;
+            }
+            else if (score > 300)
+            {
+                minAlienSpeed = 3;
+                maxAlienSpeed = 6;
+            }
+
 
             base.Update(gameTime);
         }

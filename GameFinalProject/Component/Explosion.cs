@@ -106,7 +106,7 @@ namespace AnimationExplosion
 
         public Rectangle getBound()
         {
-            return new Rectangle((int)position.X, (int)position.Y, tex.Width / COL, tex.Height / ROW);
+            return new Rectangle((int)position.X + 10, (int)position.Y + 10, tex.Width / COL - 20, tex.Height / ROW - 20);
         }
     }
 }

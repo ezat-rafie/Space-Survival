@@ -184,3 +184,4 @@ C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Sounds\alienDying.xnb
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Laser.xnb
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Sounds\alienDying.xnb
+C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Laser.xnb
