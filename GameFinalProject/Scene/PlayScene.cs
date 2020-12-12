@@ -47,6 +47,7 @@ namespace GameFinalProject
 
         //Astronaut
         private Astronaut astronaut;
+        private Rectangle astronautRect;
 
         // add string components
         StringComponent msInfo;
@@ -144,10 +145,10 @@ namespace GameFinalProject
                 aliens[j].Position = randAlienPosition;
                 aliens[j].Speed = randAlienSpeed;
 
+                aliens[j].start();
                 Vector2 direction = astronaut.Position - aliens[j].Position;
                 direction.Normalize();
                 aliens[j].Position += direction * aliens[j].Speed;
-                aliens[j].start();
                 j++;
                 i = 0;
                 if (j == aliens.Length)
@@ -178,22 +179,29 @@ namespace GameFinalProject
             }
             oldState = ms;
 
-            foreach (Alien alien in aliens.ToArray())
+            astronautRect = astronaut.GetBound();
+            foreach (Alien alien in aliens)
             {
                 alienRect = alien.GetBound();
 
                 if (explosionRect.Intersects(alienRect))
                 {
+                    alien.Speed += alien.Speed * 10;
                     alien.hide();
                     alienDying.Play();
-                    alien.IsAlive = false;
                     alienRect = Rectangle.Empty;
-                    alienRect.Width = 0;
-                    alienRect.Height = 0;
                     explosionRect = Rectangle.Empty;
+                    alien.IsAlive = false;
                     break;
                 }
+                if (astronautRect.Intersects(alienRect) && alien.IsAlive == true)
+                {
+                    MessageBox.Show("Game Over", "You died", new[] { "New Game", "Main Page", "Exit" });
+                    this.Enabled = false;
+                }
             }
+
+
 
             /*
             delayCounter++;

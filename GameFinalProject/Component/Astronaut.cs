@@ -116,5 +116,10 @@ namespace GameFinalProject.Component
             base.Update(gameTime);
         }
 
+        public Rectangle GetBound()
+        {
+            return new Rectangle((int)position.X, (int)position.Y, tex.Width / 5, tex.Height / 5);
+        }
+
     }
 }
