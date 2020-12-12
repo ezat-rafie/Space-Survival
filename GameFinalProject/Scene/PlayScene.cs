@@ -147,19 +147,48 @@ namespace GameFinalProject
                 direction.Normalize();
                 aliens[j].Position += direction * aliens[j].Speed;
                 aliens[j].start();
+                j++;
                 i = 0;
-                if (j == aliens.Length -1 )
+                if (j == aliens.Length)
                 {
                     j = 0;
                 }
             }
             i++;
 
-            // GetBound and update direction here
+            // Aliens' movement
             //foreach (Alien alien in aliens)
             //{
+            //    Vector2 randAlienPosition = new Vector2(random.Next(minAlienPositionX, maxAlienPositionX), random.Next(minAlienPositionY, maxAlienPositionY));
+            //    Vector2 randAlienSpeed = new Vector2(random.Next(minAlienSpeed, maxAlienSpeed), random.Next(minAlienSpeed, maxAlienSpeed));
+            //    alien.Position = randAlienPosition;
+            //    alien.Speed = randAlienSpeed;
+            //    Vector2 direction = astronaut.Position - alien.Position;
+            //    direction.Normalize();
+            //    alien.Position += direction * alien.Speed;
+            //    alien.start();
             //}
-            
+            //for (int i = 0; i < aliens.Length; i++)
+            //{
+            //    for (delayCounter = 0; delayCounter - 1 < delay; delayCounter++)
+            //    {
+            //        if (delayCounter == delay)
+            //        {
+            //            Vector2 randAlienPosition = new Vector2(random.Next(minAlienPositionX, maxAlienPositionX), random.Next(minAlienPositionY, maxAlienPositionY));
+            //            Vector2 randAlienSpeed = new Vector2(random.Next(minAlienSpeed, maxAlienSpeed), random.Next(minAlienSpeed, maxAlienSpeed));
+            //            aliens[i].Position = randAlienPosition;
+            //            aliens[i].Speed = randAlienSpeed;
+
+            //            Vector2 direction = astronaut.Position - aliens[i].Position;
+            //            direction.Normalize();
+            //            aliens[i].Position += direction * aliens[i].Speed;
+            //            aliens[i].start();
+
+            //            delayCounter = 0;
+            //            break;
+            //        }
+            //    }
+            //}
             //mouseClick explosion
             MouseState ms = Mouse.GetState();
 
