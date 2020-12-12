@@ -31,7 +31,6 @@ namespace GameFinalProject
         private int maxAlien = 8;
         private int minAlien = 1;
         Rectangle alienRect;
-        Rectangle explosionRect;
 
         private int minAlienPositionX = 0;
         private int maxAlienPositionX = 1000;
@@ -64,9 +63,13 @@ namespace GameFinalProject
         private MouseState oldState;
         private SoundEffect shootingSound;
         private Texture2D explosionSprite;
+        Rectangle explosionRect;
 
         //Rocket
         private Rocket rocket;
+
+        //Laser
+        private Laser laser;
 
         public PlayScene(Game game, SpriteBatch spriteBatch, Song song, Texture2D background) : base(game)
         {
@@ -95,11 +98,15 @@ namespace GameFinalProject
             astronaut = new Astronaut(game, spriteBatch, game.Content.Load<Texture2D>("Images/Astronaut"), 3);
             this.Components.Add(astronaut);
 
-            //Mouse click explosion
+            //Explosion
             explosionSprite = game.Content.Load<Texture2D>("Images/explosion");
             shootingSound = game.Content.Load<SoundEffect>("Sounds/Explosion");
             explosion = new Explosion(game, spriteBatch, explosionSprite, Vector2.Zero,shootingSound, 3);
             this.Components.Add(explosion);
+
+            //Laser
+            laser = new Laser(game, spriteBatch, 3);
+            this.Components.Add(laser);
 
             //Shooting
             alienDying = game.Content.Load<SoundEffect>("Sounds/alienDying");
@@ -135,6 +142,8 @@ namespace GameFinalProject
 
         int i = 0;
         int j = 0;
+
+
         public override void Update(GameTime gameTime)
         {
             
@@ -174,6 +183,11 @@ namespace GameFinalProject
             {
                 explosion.Position = new Vector2(ms.X-55, ms.Y-55);
                 explosion.start();
+
+                laser.MousePosition = new Vector2(ms.X, ms.Y);
+                laser.Position = new Vector2(astronaut.Position.X + 64, astronaut.Position.Y + 5);
+                laser.start();
+
                 shootingSound.Play();
                 explosionRect = explosion.getBound();
             }
