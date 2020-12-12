@@ -178,7 +178,7 @@ namespace GameFinalProject
             }
             oldState = ms;
 
-            foreach (Alien alien in aliens)
+            foreach (Alien alien in aliens.ToArray())
             {
                 alienRect = alien.GetBound();
 
@@ -186,9 +186,10 @@ namespace GameFinalProject
                 {
                     alien.hide();
                     alienDying.Play();
-
-                    
-                    alienRect = new Rectangle(0, 0, 0, 0);
+                    alien.IsAlive = false;
+                    alienRect = Rectangle.Empty;
+                    alienRect.Width = 0;
+                    alienRect.Height = 0;
                     explosionRect = Rectangle.Empty;
                     break;
                 }

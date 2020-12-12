@@ -20,6 +20,7 @@ namespace GameFinalProject
         private int frameIndex = -1;
         private int delay;
         private int delayCounter;
+        private bool isAlive;
 
         //private const int WIDTH = 128;
         //private const int HEIGHT = 128;
@@ -29,6 +30,7 @@ namespace GameFinalProject
 
         public Vector2 Position { get => position; set => position = value; }
         public Vector2 Speed { get => speed; set => speed = value; }
+        public bool IsAlive { get => isAlive; set => isAlive = value; }
 
         public Alien(Game game,
             SpriteBatch spriteBatch,
@@ -38,7 +40,7 @@ namespace GameFinalProject
             this.spriteBatch = spriteBatch;
             this.alien = alien;
             this.delay = delay;
-
+            this.IsAlive = true;
             dimension = new Vector2(alien.Width / COL, alien.Height / ROW);
 
             hide();
@@ -47,9 +49,8 @@ namespace GameFinalProject
 
         public void hide()
         {
-            this.Enabled = false;
+            //this.Enabled = false;
             this.Visible = false;
-
         }
         public void start()
         {
