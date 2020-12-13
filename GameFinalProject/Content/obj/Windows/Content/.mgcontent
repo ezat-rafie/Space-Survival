@@ -9,6 +9,7 @@
     <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Fonts/SpecialFont.spritefont</File>
     <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/Alien.png</File>
     <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/Astronaut.png</File>
+    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/BigExplosion.png</File>
     <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/bomb.png</File>
     <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/Explosion.png</File>
     <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/Fireball2.png</File>
@@ -29,6 +30,7 @@
     <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Sounds/WinSound.wav</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

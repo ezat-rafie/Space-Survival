@@ -261,8 +261,13 @@ namespace GameFinalProject
                 {
                     HideAllScenes();
                     startScene.Show();
-                    playScene1.score = 0;
-                    playScene2.score = 0;
+                    //playScene1.score = 0;
+                    //playScene2.score = 0;
+                    //playScene1.isOver = false;
+                    //playScene2.isOver = false;
+                    //this.Components.Remove(playScene1);
+                    //this.Components.Remove(playScene2);
+                    LoadContent();
                     SwitchMusic(startMusic);
                 }
             }
@@ -282,7 +287,7 @@ namespace GameFinalProject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.LavenderBlush);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
 

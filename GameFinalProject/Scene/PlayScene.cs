@@ -19,7 +19,11 @@ namespace GameFinalProject
         private SpriteBatch spriteBatch;
         private Song song;
         private Texture2D background;
+        private Texture2D gameOver;
+        public bool isOver;
+        public bool hitFireball;
         private Vector2 backgroundPosition = new Vector2(0,-400);
+        //public bool IsOver { get => isOver; set => isOver = value; }
 
         //Alien
         private Alien alien;
@@ -42,8 +46,8 @@ namespace GameFinalProject
         //private int minAlienPositionY = -1500;
         //private int maxAlienPositionY = 200;
 
-        private int minSpeed = 1;
-        private int maxSpeed = 3;
+        private int minSpeed = 3;
+        private int maxSpeed = 5;
         
         //Shooting
         private Shooting shooting;
@@ -56,11 +60,13 @@ namespace GameFinalProject
         private Rectangle overlapDie;
 
         // add string components
-        //StringComponent msInfo;
+        StringComponent overMsg;
         StringComponent scoreInfo;
         public int score = 0;
         string totalScore;
-        SpriteFont font;
+        string msg;
+        SpriteFont fontReg;
+        SpriteFont fontHigh;
 
         // time gap between creating next alien
         private int delay = 100;
@@ -83,13 +89,19 @@ namespace GameFinalProject
         //Laser
         private Laser laser;
 
-        public PlayScene(Game game, SpriteBatch spriteBatch, Song song, Texture2D background, int level) : base(game)
+        public PlayScene(Game game, 
+            SpriteBatch spriteBatch, 
+            Song song, 
+            Texture2D background, 
+            int level) : base(game)
         {
             this.spriteBatch = spriteBatch;
             this.song = song;   
             MediaPlayer.IsRepeating = true;
             this.background = background;
             this.level = level;
+            isOver = false;
+            hitFireball = false;
 
             // Rocket
             rocket = new Rocket(game, spriteBatch);
@@ -134,21 +146,22 @@ namespace GameFinalProject
             shooting = new Shooting(game, alien, explosion);
             this.Components.Add(shooting);
 
-            /*
+            
             // getting mouse position practice
-            font = game.Content.Load<SpriteFont>("Fonts/RegularFont");
-            string msg = "TEST";
-            msInfo = new StringComponent(game, spriteBatch, font, Vector2.Zero, msg, Color.AliceBlue);
-            this.Components.Add(msInfo);
+            fontHigh = game.Content.Load<SpriteFont>("Fonts/HighlightFont");
+            msg = "";
+            overMsg = new StringComponent(game, spriteBatch, fontHigh, Vector2.Zero, msg, Color.Yellow);
+            this.Components.Add(overMsg);
 
-            */
+            
             // Point
             score = 0;
-            font = game.Content.Load<SpriteFont>("Fonts/RegularFont");
+            fontReg = game.Content.Load<SpriteFont>("Fonts/RegularFont");
             string totalScore = " ";
-            scoreInfo = new StringComponent(game, spriteBatch, font, Vector2.Zero, totalScore, Color.AliceBlue);
+            scoreInfo = new StringComponent(game, spriteBatch, fontReg, Vector2.Zero, totalScore, Color.AliceBlue);
             this.Components.Add(scoreInfo);
-            
+
+            gameOver = game.Content.Load<Texture2D>("Images/BigExplosion");
         }
 
         public override void Draw(GameTime gameTime)
@@ -156,7 +169,10 @@ namespace GameFinalProject
             spriteBatch.Begin();
 
             spriteBatch.Draw(background, backgroundPosition, Color.White);
-            
+            if (isOver && hitFireball)
+            {
+                spriteBatch.Draw(gameOver, new Rectangle(0, 0, (int)Shared.stage.X, (int)Shared.stage.Y), Color.White);
+            }
 
             spriteBatch.End();
 
@@ -167,125 +183,169 @@ namespace GameFinalProject
         int j = 0;
         int k = 0;
 
+
         public override void Update(GameTime gameTime)
         {
-            
-            if ((i > delay && j < aliens.Length) || (i == 0))
+            if (!isOver)
             {
-                Vector2 randAlienPosition = new Vector2(random.Next(minPositionX, maxPositionX), 0);
-                Vector2 randAlienSpeed = new Vector2(random.Next(minSpeed, maxSpeed), random.Next(minSpeed, maxSpeed));
-                aliens[j].Position = randAlienPosition;
-                aliens[j].Speed = randAlienSpeed;
-                aliens[j].IsAlive = true;
-
-                aliens[j].start();
-                Vector2 direction = astronaut.Position - aliens[j].Position;
-                direction.Normalize();
-                aliens[j].Position += direction * aliens[j].Speed;
-                j++;
-                i = 0;
-                if (j == aliens.Length)
+                // Creating Aliens
+                if ((i > delay && j < aliens.Length) || (i == 0))
                 {
-                    j = 0;
-                }
-            }
-            i++;
+                    Vector2 randAlienPosition = new Vector2(random.Next(minPositionX, maxPositionX), 0);
+                    Vector2 randAlienSpeed = new Vector2(random.Next(minSpeed, maxSpeed), random.Next(minSpeed, maxSpeed));
+                    aliens[j].Position = randAlienPosition;
+                    aliens[j].Speed = randAlienSpeed;
+                    aliens[j].IsAlive = true;
 
-            if (k > delay * 5 && level == 2)
-            {
-                Vector2 randPosition = new Vector2(random.Next(minPositionX, maxPositionX), 0);
-                Vector2 randSpeed = new Vector2(random.Next(minSpeed, maxSpeed), random.Next(minSpeed, maxSpeed));
-                fireball.Position = randPosition;
-                fireball.Speed = randSpeed;
-                fireball.start();
-                k = 0;
-            }
-            k++;
-
-            // Aliens' movement
-            //foreach (Alien alien in aliens)
-            //{
-            //    Vector2 direction = astronaut.Position - alien.Position;
-            //    direction.Normalize();
-            //    alien.Position += direction * alien.Speed;
-            //}
-
-
-            //mouseClick explosion
-            MouseState ms = Mouse.GetState();
-            if (ms.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
-            {
-                explosion.Position = new Vector2(ms.X-55, ms.Y-55);
-                explosion.start();
-
-                //laser.MousePosition = new Vector2(ms.X, ms.Y);
-                //laser.Position = new Vector2(astronaut.Position.X + 64, astronaut.Position.Y + 5);
-                //laser.start();
-
-                shootingSound.Play();
-                explosionRect = explosion.getBound();
-                mouseRect = new Rectangle(ms.X - 5, ms.Y - 5, 10, 10);
-
-                if (level == 2)
-                {
-                    fireballRect = fireball.GetBound();
-                    if (mouseRect.Intersects(fireballRect))
+                    aliens[j].start();
+                    Vector2 direction = astronaut.Position - aliens[j].Position;
+                    direction.Normalize();
+                    aliens[j].Position += direction * aliens[j].Speed;
+                    j++;
+                    i = 0;
+                    if (j == aliens.Length)
                     {
-                        MessageBox.Show("Game Over", $"You died! Score : {score}", new[] { "New Game", "Main Page", "Exit" });
-                        this.Enabled = false;
-                    } 
+                        j = 0;
+                    }
                 }
-            }
-            oldState = ms;
+                i++;
 
-            astronautRect = astronaut.GetBound();
-            foreach (Alien alien in aliens)
+                // Creating Fireballs
+                if (k > delay * 5 && level == 2)
+                {
+                    Vector2 randPosition = new Vector2(random.Next(minPositionX, maxPositionX), 0);
+                    Vector2 randSpeed = new Vector2(random.Next(minSpeed, maxSpeed), random.Next(minSpeed, maxSpeed));
+                    fireball.Position = randPosition;
+                    fireball.Speed = randSpeed;
+                    fireball.start();
+                    k = 0;
+                }
+                k++;
+
+                // Aliens' movement
+                //foreach (Alien alien in aliens)
+                //{
+                //    Vector2 direction = astronaut.Position - alien.Position;
+                //    direction.Normalize();
+                //    alien.Position += direction * alien.Speed;
+                //}
+
+                //mouseClick explosion
+                MouseState ms = Mouse.GetState();
+                if (ms.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
+                {
+                    explosion.Position = new Vector2(ms.X - 55, ms.Y - 55);
+                    explosion.start();
+
+                    //laser.MousePosition = new Vector2(ms.X, ms.Y);
+                    //laser.Position = new Vector2(astronaut.Position.X + 64, astronaut.Position.Y + 5);
+                    //laser.start();
+
+                    shootingSound.Play();
+                    explosionRect = explosion.getBound();
+                    mouseRect = new Rectangle(ms.X - 5, ms.Y - 5, 10, 10);
+
+                    if (level == 2)
+                    {
+                        fireballRect = fireball.GetBound();
+                        if (mouseRect.Intersects(fireballRect))
+                        {
+                            isOver = true;
+                            hitFireball = true;
+                            //int result;
+                            //result = Convert.ToInt32(MessageBox.Show("Game Over", $"You died! Score : {score}", new[] { "New Game", "Main Page" }));
+                            //if (result == 0)
+                            //{
+                            //    Vector2 dimension = font.MeasureString("New Game");
+                            //    Vector2 strPos = new Vector2(Shared.stage.X - dimension.X,
+                            //        Shared.stage.Y - dimension.Y);
+                            //    info.Position = strPos;
+                            //}
+                            //this.Enabled = false;
+                        }
+                    }
+                }
+                oldState = ms;
+
+                astronautRect = astronaut.GetBound();
+                foreach (Alien alien in aliens)
+                {
+                    alienRect = alien.GetBound();
+                    overlapDie = new Rectangle();
+                    //overlapKill = new Rectangle();
+                    overlapDie = Rectangle.Intersect(alienRect, astronautRect);
+                    //overlapKill = Rectangle.Intersect(alienRect, explosionRect);
+                    int overlapDieDim = overlapDie.Width * overlapDie.Height;
+                    //int overlapKillDim = overlapKill.Width * overlapKill.Height;
+
+                    //if (overlapKillDim > 800 && alien.IsAlive)
+                    //{
+                    //    alien.Speed += alien.Speed * 10;
+                    //    alien.hide();
+                    //    alienDying.Play();
+                    //    alienRect = Rectangle.Empty;
+                    //    explosionRect = Rectangle.Empty;
+                    //    alien.IsAlive = false;
+                    //    score += 100;
+                    //    break;
+                    //}
+
+                    // used mouseRect instead of explosionRect
+                    // for better targeting
+                    if (mouseRect.Intersects(alienRect))
+                    {
+                        alien.Speed += alien.Speed * 10;
+                        alien.hide();
+                        alienDying.Play();
+                        alienRect = Rectangle.Empty;
+                        explosionRect = Rectangle.Empty;
+                        alien.IsAlive = false;
+                        score += 100;
+                        break;
+                    }
+                    if (overlapDieDim > 1500 && alien.IsAlive)
+                    {
+                        isOver = true;
+                        
+                        //var result = MessageBox.Show("Game Over", $"You died! Score : {score}", new[] { "New Game", "Main Page" });
+
+                        //if (result.ToString() !=null)
+                        //{
+                        //    string mg = result.ToString();
+                        //    info.Message = mg;
+                        //    Vector2 dimension = font.MeasureString(mg);
+                        //    Vector2 strPos = new Vector2(Shared.stage.X - dimension.X,
+                        //        Shared.stage.Y - dimension.Y);
+                        //    info.Position = strPos;
+
+                        //}
+                    }
+                    //if (astronautRect.Intersects(alienRect) && alien.IsAlive)
+                    //{
+                    //    MessageBox.Show("Game Over", "You died", new[] { "New Game", "Main Page", "Exit" });
+                    //    this.Enabled = false;
+                    //}
+                }
+
+            }
+            else
             {
-                alienRect = alien.GetBound();
-                overlapDie = new Rectangle();
-                //overlapKill = new Rectangle();
-                overlapDie = Rectangle.Intersect(alienRect, astronautRect);
-                //overlapKill = Rectangle.Intersect(alienRect, explosionRect);
-                int overlapDieDim = overlapDie.Width * overlapDie.Height;
-                //int overlapKillDim = overlapKill.Width * overlapKill.Height;
+                msg = $" GAME OVER \n Your total Score : {score} \n Please press [ESC] key \n to go back to menu.";
+                Vector2 dimension = fontHigh.MeasureString(msg);
+                Vector2 strPos = new Vector2(10, Shared.stage.Y / 2 - dimension.X / 2);
+                overMsg.Position = strPos;
+                overMsg.Message = msg;
 
-                //if (overlapKillDim > 800 && alien.IsAlive)
-                //{
-                //    alien.Speed += alien.Speed * 10;
-                //    alien.hide();
-                //    alienDying.Play();
-                //    alienRect = Rectangle.Empty;
-                //    explosionRect = Rectangle.Empty;
-                //    alien.IsAlive = false;
-                //    score += 100;
-                //    break;
-                //}
-
-                // used mouseRect instead of explosionRect
-                // for better targeting
-                if (mouseRect.Intersects(alienRect))
+                //GraphicsDevice.Clear(Color.Black);
+                this.Components.Remove(fireball);
+                this.Components.Remove(rocket);
+                this.Components.Remove(scoreInfo);
+                foreach (var alien in aliens)
                 {
-                    alien.Speed += alien.Speed * 10;
-                    alien.hide();
-                    alienDying.Play();
-                    alienRect = Rectangle.Empty;
-                    explosionRect = Rectangle.Empty;
-                    alien.IsAlive = false;
-                    score += 100;
-                    break;
+                    this.Components.Remove(alien);
                 }
-                if (overlapDieDim > 1500 && alien.IsAlive)
-                {
-                    MessageBox.Show("Game Over", $"You died! Score : {score}", new[] { "New Game", "Main Page", "Exit" });
-                    this.Enabled = false;
-                }
-                //if (astronautRect.Intersects(alienRect) && alien.IsAlive)
-                //{
-                //    MessageBox.Show("Game Over", "You died", new[] { "New Game", "Main Page", "Exit" });
-                //    this.Enabled = false;
-                //}
+                MediaPlayer.Pause();
             }
-            
 
 
             /*
@@ -295,16 +355,16 @@ namespace GameFinalProject
                 timer = timer + 1;
                 delayCounter = 0;
             }
-
-            // Update mouse info
-            ms = Mouse.GetState();
-            string msg = $"MOUSE POSITION : {ms.X} , {ms.Y}";
-            Vector2 dimension = font.MeasureString(msg);
-            Vector2 strPos = new Vector2(Shared.stage.X - dimension.X,
-                Shared.stage.Y - dimension.Y);
-            msInfo.Position = strPos;
-            msInfo.Message = msg;
             */
+            ////Update mouse info
+            //ms = Mouse.GetState();
+            //string msg = $"MOUSE POSITION : {ms.X} , {ms.Y}";
+            //Vector2 dimension = font.MeasureString(msg);
+            //Vector2 strPos = new Vector2(Shared.stage.X - dimension.X,
+            //    Shared.stage.Y - dimension.Y);
+            //info.Position = strPos;
+            //info.Message = msg;
+            
 
             // Update score info
             totalScore = $"SCORE : {score}";
