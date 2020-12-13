@@ -45,6 +45,7 @@
     <Compile Include="Component\Alien.cs" />
     <Compile Include="Component\Astronaut.cs" />
     <Compile Include="Component\Explosion.cs" />
+    <Compile Include="Component\Fireball.cs" />
     <Compile Include="Component\Laser.cs" />
     <Compile Include="Component\Rocket.cs" />
     <Compile Include="Component\Shooting.cs" />

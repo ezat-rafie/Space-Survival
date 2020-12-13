@@ -31,13 +31,17 @@ namespace GameFinalProject
         //private int minAlien = 1;
         Rectangle alienRect;
 
-        private int minAlienPositionX = 0;
-        private int maxAlienPositionX = 900;
+        //Fireball
+        private Fireball fireball;
+        Rectangle fireballRect;
+
+        private int minPositionX = 0;
+        private int maxPositionX = 900;
         //private int minAlienPositionY = -1500;
         //private int maxAlienPositionY = 200;
 
-        private int minAlienSpeed = 1;
-        private int maxAlienSpeed = 3;
+        private int minSpeed = 1;
+        private int maxSpeed = 3;
         
         //Shooting
         private Shooting shooting;
@@ -100,6 +104,10 @@ namespace GameFinalProject
                 this.Components.Add(aliens[i]);
             }
 
+            //fireball
+            fireball = new Fireball(game, spriteBatch, game.Content.Load<Texture2D>("Images/Fireball2"), 3);
+            this.Components.Add(fireball);
+
             //Astronaut
             astronaut = new Astronaut(game, spriteBatch, game.Content.Load<Texture2D>("Images/Astronaut"), 3);
             this.Components.Add(astronaut);
@@ -149,15 +157,15 @@ namespace GameFinalProject
 
         int i = 0;
         int j = 0;
-
+        int k = 0;
 
         public override void Update(GameTime gameTime)
         {
             
             if ((i > delay && j < aliens.Length) || (i == 0))
             {
-                Vector2 randAlienPosition = new Vector2(random.Next(minAlienPositionX, maxAlienPositionX), 0);
-                Vector2 randAlienSpeed = new Vector2(random.Next(minAlienSpeed, maxAlienSpeed), random.Next(minAlienSpeed, maxAlienSpeed));
+                Vector2 randAlienPosition = new Vector2(random.Next(minPositionX, maxPositionX), 0);
+                Vector2 randAlienSpeed = new Vector2(random.Next(minSpeed, maxSpeed), random.Next(minSpeed, maxSpeed));
                 aliens[j].Position = randAlienPosition;
                 aliens[j].Speed = randAlienSpeed;
                 aliens[j].IsAlive = true;
@@ -174,6 +182,17 @@ namespace GameFinalProject
                 }
             }
             i++;
+
+            if (k > delay * 5)
+            {
+                Vector2 randPosition = new Vector2(random.Next(minPositionX, maxPositionX), 0);
+                Vector2 randSpeed = new Vector2(random.Next(minSpeed, maxSpeed), random.Next(minSpeed, maxSpeed));
+                fireball.Position = randPosition;
+                fireball.Speed = randSpeed;
+                fireball.start();
+                k = 0;
+            }
+            k++;
 
             // Aliens' movement
             //foreach (Alien alien in aliens)
@@ -198,6 +217,12 @@ namespace GameFinalProject
                 shootingSound.Play();
                 explosionRect = explosion.getBound();
                 mouseRect = new Rectangle(ms.X - 5, ms.Y - 5, 10, 10);
+                fireballRect = fireball.GetBound();
+                if (mouseRect.Intersects(fireballRect))
+                {
+                    MessageBox.Show("Game Over", $"You died! Score : {score}", new[] { "New Game", "Main Page", "Exit" });
+                    this.Enabled = false;
+                }
             }
             oldState = ms;
 
@@ -233,7 +258,6 @@ namespace GameFinalProject
                     alienDying.Play();
                     alienRect = Rectangle.Empty;
                     explosionRect = Rectangle.Empty;
-                    mouseRect = new Rectangle(0, 0, 0, 0);
                     alien.IsAlive = false;
                     score += 100;
                     break;
@@ -248,10 +272,8 @@ namespace GameFinalProject
                 //    MessageBox.Show("Game Over", "You died", new[] { "New Game", "Main Page", "Exit" });
                 //    this.Enabled = false;
                 //}
-
-                
             }
-
+            
 
 
             /*
@@ -276,6 +298,7 @@ namespace GameFinalProject
             totalScore = $"SCORE : {score}";
             scoreInfo.Message = totalScore;
 
+            //Initialize it
             mouseRect = new Rectangle(0, 0, 0, 0);
 
             // Make it faster~
@@ -283,24 +306,24 @@ namespace GameFinalProject
             {
                 maxAlien = 20;
                 delay = 10;
-                minAlienSpeed = 10;
-                maxAlienSpeed = 12;
+                minSpeed = 10;
+                maxSpeed = 12;
             }
             else if (score > 800)
             {
-                minAlienSpeed = 7;
-                maxAlienSpeed = 10;
+                minSpeed = 7;
+                maxSpeed = 10;
             }
             else if (score > 500)
             {
                 delay = 50;
-                minAlienSpeed = 5;
-                maxAlienSpeed = 8;
+                minSpeed = 5;
+                maxSpeed = 8;
             }
             else if (score > 300)
             {
-                minAlienSpeed = 3;
-                maxAlienSpeed = 6;
+                minSpeed = 3;
+                maxSpeed = 6;
             }
 
 
