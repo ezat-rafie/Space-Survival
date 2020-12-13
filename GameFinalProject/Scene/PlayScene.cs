@@ -20,7 +20,7 @@ namespace GameFinalProject
         private Song song;
         private Texture2D background;
         private Texture2D gameOver;
-        public bool isOver;
+        private bool isOver = false;
         public bool hitFireball;
         private Vector2 backgroundPosition = new Vector2(0,-400);
         //public bool IsOver { get => isOver; set => isOver = value; }
@@ -62,11 +62,17 @@ namespace GameFinalProject
         // add string components
         StringComponent overMsg;
         StringComponent scoreInfo;
-        public int score = 0;
         string totalScore;
         string msg;
         SpriteFont fontReg;
         SpriteFont fontHigh;
+        private int score = 0;
+        public int Score { get => score; set => score = value; }
+        public bool IsOver { get => isOver; set => isOver = value; }
+
+        //score
+        private ScoreManager scoreManager;
+        
 
         // time gap between creating next alien
         private int delay = 100;
@@ -89,6 +95,11 @@ namespace GameFinalProject
         //Laser
         private Laser laser;
 
+        //Game over
+        private GameOver gameOverExplosion;
+        private Texture2D bigExplosion;
+        private SoundEffect gameOverSound;
+
         public PlayScene(Game game, 
             SpriteBatch spriteBatch, 
             Song song, 
@@ -102,6 +113,12 @@ namespace GameFinalProject
             this.level = level;
             isOver = false;
             hitFireball = false;
+
+            //Game over explosion
+            bigExplosion = game.Content.Load<Texture2D>("Images/SpaceShip Explosion");
+            gameOverSound = game.Content.Load<SoundEffect>("Sounds/GameOver");
+            gameOverExplosion = new GameOver(game, spriteBatch, bigExplosion, Vector2.Zero, gameOverSound, 3);
+            this.Components.Add(gameOverExplosion);
 
             // Rocket
             rocket = new Rocket(game, spriteBatch);
@@ -162,6 +179,9 @@ namespace GameFinalProject
             this.Components.Add(scoreInfo);
 
             gameOver = game.Content.Load<Texture2D>("Images/BigExplosion");
+
+            //Score
+            scoreManager = new ScoreManager();
         }
 
         public override void Draw(GameTime gameTime)
@@ -251,7 +271,16 @@ namespace GameFinalProject
                         if (mouseRect.Intersects(fireballRect))
                         {
                             isOver = true;
+                            gameOverSound.Play();
                             hitFireball = true;
+                            string storeScore = $"Ali {score}";
+                            //scoreManager.Add(new Score()
+                            //    {
+                            //        PlayerName = "Ali",
+                            //        Value = score,
+                            //    }
+                            //);
+                            ScoreManager.Save(storeScore);
                             //int result;
                             //result = Convert.ToInt32(MessageBox.Show("Game Over", $"You died! Score : {score}", new[] { "New Game", "Main Page" }));
                             //if (result == 0)
@@ -306,7 +335,20 @@ namespace GameFinalProject
                     if (overlapDieDim > 1500 && alien.IsAlive)
                     {
                         isOver = true;
-                        
+                        gameOverExplosion.Position = new Vector2(Shared.stage.X / 2 - 302 / 2, Shared.stage.Y - 302);
+                        gameOverExplosion.start();
+                        gameOverSound.Play();
+
+                        string storeScore = $"Ali {score}";
+                        //scoreManager.Add(new Score()
+                        //    {
+                        //        PlayerName = "Ali",
+                        //        Value = score,
+                        //    }
+                        //);
+                        ScoreManager.Save(storeScore);
+
+
                         //var result = MessageBox.Show("Game Over", $"You died! Score : {score}", new[] { "New Game", "Main Page" });
 
                         //if (result.ToString() !=null)
@@ -374,6 +416,7 @@ namespace GameFinalProject
             mouseRect = new Rectangle(0, 0, 0, 0);
 
             // Make it faster~
+            // ! WHY??
             if (score > 2000)
             {
                 maxAlien = 20;

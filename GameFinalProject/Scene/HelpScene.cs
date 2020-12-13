@@ -12,9 +12,20 @@ namespace GameFinalProject
     public class HelpScene : GameScene
     {
         private SpriteBatch spriteBatch;
+        private Texture2D helpPage;
+        private Vector2 position = new Vector2(0, 0);
         public HelpScene(Game game, SpriteBatch spriteBatch) : base(game)
         {
             this.spriteBatch = spriteBatch;
+            helpPage = game.Content.Load<Texture2D>("Images/About");
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            spriteBatch.Begin();
+            spriteBatch.Draw(helpPage, position, Color.White);
+            spriteBatch.End();
+            base.Draw(gameTime);
         }
     }
 }

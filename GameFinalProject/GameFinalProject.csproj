@@ -46,8 +46,11 @@
     <Compile Include="Component\Astronaut.cs" />
     <Compile Include="Component\Explosion.cs" />
     <Compile Include="Component\Fireball.cs" />
+    <Compile Include="Component\GameOver.cs" />
     <Compile Include="Component\Laser.cs" />
     <Compile Include="Component\Rocket.cs" />
+    <Compile Include="Component\Score.cs" />
+    <Compile Include="Component\ScoreManager.cs" />
     <Compile Include="Component\Shooting.cs" />
     <Compile Include="Component\StringComponent.cs" />
     <Compile Include="Scene\AboutScene.cs" />
