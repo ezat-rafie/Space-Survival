@@ -56,6 +56,7 @@
     <Compile Include="Scene\HelpScene.cs" />
     <Compile Include="Scene\HighScoreScene.cs" />
     <Compile Include="Component\MenuComponent.cs" />
+    <Compile Include="Scene\LevelScene.cs" />
     <Compile Include="Scene\PlayScene.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

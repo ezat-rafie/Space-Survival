@@ -14,6 +14,8 @@ namespace GameFinalProject
 {
     public class PlayScene : GameScene
     {
+        private int level;
+
         private SpriteBatch spriteBatch;
         private Song song;
         private Texture2D background;
@@ -56,7 +58,7 @@ namespace GameFinalProject
         // add string components
         //StringComponent msInfo;
         StringComponent scoreInfo;
-        int score = 0;
+        public int score = 0;
         string totalScore;
         SpriteFont font;
 
@@ -73,7 +75,7 @@ namespace GameFinalProject
         private SoundEffect shootingSound;
         private Texture2D explosionSprite;
         Rectangle explosionRect;
-        private Rectangle overlapKill;
+        //private Rectangle overlapKill;
 
         //Rocket
         private Rocket rocket;
@@ -81,12 +83,13 @@ namespace GameFinalProject
         //Laser
         private Laser laser;
 
-        public PlayScene(Game game, SpriteBatch spriteBatch, Song song, Texture2D background) : base(game)
+        public PlayScene(Game game, SpriteBatch spriteBatch, Song song, Texture2D background, int level) : base(game)
         {
             this.spriteBatch = spriteBatch;
             this.song = song;   
             MediaPlayer.IsRepeating = true;
             this.background = background;
+            this.level = level;
 
             // Rocket
             rocket = new Rocket(game, spriteBatch);
@@ -105,8 +108,12 @@ namespace GameFinalProject
             }
 
             //fireball
-            fireball = new Fireball(game, spriteBatch, game.Content.Load<Texture2D>("Images/Fireball2"), 3);
-            this.Components.Add(fireball);
+            if (level ==2)
+            {
+                fireball = new Fireball(game, spriteBatch, game.Content.Load<Texture2D>("Images/Fireball2"), 3);
+                this.Components.Add(fireball);
+            }
+            
 
             //Astronaut
             astronaut = new Astronaut(game, spriteBatch, game.Content.Load<Texture2D>("Images/Astronaut"), 3);
@@ -136,6 +143,7 @@ namespace GameFinalProject
 
             */
             // Point
+            score = 0;
             font = game.Content.Load<SpriteFont>("Fonts/RegularFont");
             string totalScore = " ";
             scoreInfo = new StringComponent(game, spriteBatch, font, Vector2.Zero, totalScore, Color.AliceBlue);
@@ -183,7 +191,7 @@ namespace GameFinalProject
             }
             i++;
 
-            if (k > delay * 5)
+            if (k > delay * 5 && level == 2)
             {
                 Vector2 randPosition = new Vector2(random.Next(minPositionX, maxPositionX), 0);
                 Vector2 randSpeed = new Vector2(random.Next(minSpeed, maxSpeed), random.Next(minSpeed, maxSpeed));
@@ -217,11 +225,15 @@ namespace GameFinalProject
                 shootingSound.Play();
                 explosionRect = explosion.getBound();
                 mouseRect = new Rectangle(ms.X - 5, ms.Y - 5, 10, 10);
-                fireballRect = fireball.GetBound();
-                if (mouseRect.Intersects(fireballRect))
+
+                if (level == 2)
                 {
-                    MessageBox.Show("Game Over", $"You died! Score : {score}", new[] { "New Game", "Main Page", "Exit" });
-                    this.Enabled = false;
+                    fireballRect = fireball.GetBound();
+                    if (mouseRect.Intersects(fireballRect))
+                    {
+                        MessageBox.Show("Game Over", $"You died! Score : {score}", new[] { "New Game", "Main Page", "Exit" });
+                        this.Enabled = false;
+                    } 
                 }
             }
             oldState = ms;
@@ -316,7 +328,7 @@ namespace GameFinalProject
             }
             else if (score > 500)
             {
-                delay = 50;
+                //delay = 50;
                 minSpeed = 5;
                 maxSpeed = 8;
             }

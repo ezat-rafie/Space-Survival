@@ -30,7 +30,9 @@ namespace GameFinalProject
 
         // all scenes references
         private StartScene startScene;
-        private PlayScene playScene;
+        private PlayScene playScene1;
+        private PlayScene playScene2;
+        private LevelScene levelScene;
         private HelpScene helpScene;
         private HighScoreScene highScoreScene;
         private AboutScene aboutScene;
@@ -42,8 +44,10 @@ namespace GameFinalProject
         // soundEffect
         private SoundEffect click;
 
-        // Graphics
-
+        // keyboardState
+        private KeyboardState ks;
+        
+        private KeyboardState oldState;
 
         public Game1()
         {
@@ -124,8 +128,14 @@ namespace GameFinalProject
             startScene = new StartScene(this, spriteBatch, startMusic, click, menuBackground);
             this.Components.Add(startScene);
             
-            playScene = new PlayScene(this, spriteBatch, backgroundMusic, gameBackground);
-            this.Components.Add(playScene);
+            playScene1 = new PlayScene(this, spriteBatch, backgroundMusic, gameBackground, 1);
+            this.Components.Add(playScene1);
+
+            playScene2 = new PlayScene(this, spriteBatch, backgroundMusic, gameBackground, 2);
+            this.Components.Add(playScene2);
+
+            levelScene = new LevelScene(this, spriteBatch, click, menuBackground);
+            this.Components.Add(levelScene);
 
             helpScene = new HelpScene(this, spriteBatch);
             this.Components.Add(helpScene);
@@ -172,7 +182,8 @@ namespace GameFinalProject
             // TODO: Add your update logic here
 
             int selectedIndex = 0;
-            KeyboardState ks = Keyboard.GetState();
+
+            ks = Keyboard.GetState();
 
             if (startScene.Enabled)
             {
@@ -183,8 +194,7 @@ namespace GameFinalProject
                     switch (selectedIndex)
                     {
                         case 0:
-                            playScene.Show();
-                            SwitchMusic(backgroundMusic);
+                            levelScene.Show();
                             break;
                         case 1:
                             helpScene.Show();
@@ -203,33 +213,61 @@ namespace GameFinalProject
                             break;
                     }
                 }
-                //* changed this if block to switch
-                //if (selectedIndex == 0 && ks.IsKeyDown(Keys.Enter))
+                //if(levelScene.Enabled && oldState.IsKeyUp(Keys.Enter))
                 //{
-                //    HideAllScenes();
-                //    playScene.Show();
-                //}
-                //if (selectedIndex == 1 && ks.IsKeyDown(Keys.Enter))
-                //{
-                //    HideAllScenes();
-                //    helpScene.Show();
-                //}
-                //if (selectedIndex == 4 && ks.IsKeyDown(Keys.Enter)) // QUIT
-                //{
-                //    this.Exit();
+                //    ks = Keyboard.GetState();
+                //    selectedIndex = levelScene.Menu.SelectedIndex;
+                //    //HideAllScenes();
+                //    if (ks.IsKeyDown(Keys.Enter))
+                //    {
+                //        switch (selectedIndex)
+                //        {
+                //            case 0:
+                //                playScene.Show();
+                //                SwitchMusic(backgroundMusic);
+                //                break;
+                //            case 1:
+                //                playScene.Show();
+                //                SwitchMusic(backgroundMusic);
+                //                break;
+                //            default:
+                //                break;
+                //        }
+                //    }
                 //}
             }
+            else if (levelScene.Enabled && oldState.IsKeyUp(Keys.Enter))
+            {
+                //KeyboardState ks2 = Keyboard.GetState();
+                selectedIndex = levelScene.Menu.SelectedIndex;
+                if (selectedIndex == 0 && ks.IsKeyDown(Keys.Enter))
+                {
+                    HideAllScenes();
+                    playScene1.Show();
+                    SwitchMusic(backgroundMusic);
+                }
+                if (selectedIndex == 1 && ks.IsKeyDown(Keys.Enter))
+                {
+                    HideAllScenes();
+                    playScene2.Show();
+                    SwitchMusic(backgroundMusic);
+                }
+            }
             
-            if (playScene.Enabled || helpScene.Enabled || highScoreScene.Enabled || aboutScene.Enabled)
+            if (levelScene.Enabled || playScene1.Enabled || playScene2.Enabled || 
+                helpScene.Enabled || highScoreScene.Enabled || aboutScene.Enabled)
             {
                 if (ks.IsKeyDown(Keys.Escape))
                 {
                     HideAllScenes();
                     startScene.Show();
+                    playScene1.score = 0;
+                    playScene2.score = 0;
                     SwitchMusic(startMusic);
                 }
             }
 
+            oldState = ks;
             base.Update(gameTime);
         }
 
