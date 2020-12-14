@@ -92,6 +92,7 @@ namespace GameFinalProject
         private GameOver gameOverExplosion;
         private Texture2D bigExplosion;
         private SoundEffect gameOverSound;
+        private bool isSaved = false;
         #endregion
 
 
@@ -258,14 +259,14 @@ namespace GameFinalProject
                             isOver = true;
                             gameOverSound.Play();
                             hitFireball = true;
-                            string storeScore = $"Ali {score}";
+                            //string storeScore = $"Ali {score}";
                             //scoreManager.Add(new Score()
                             //    {
                             //        PlayerName = "Ali",
                             //        Value = score,
                             //    }
                             //);
-                            ScoreManager.Save(storeScore);
+                            //ScoreManager.Save(storeScore);
                             //int result;
                             //result = Convert.ToInt32(MessageBox.Show("Game Over", $"You died! Score : {score}", new[] { "New Game", "Main Page" }));
                             //if (result == 0)
@@ -309,14 +310,7 @@ namespace GameFinalProject
                         gameOverExplosion.start();
                         gameOverSound.Play();
 
-                        string storeScore = $"Ali {score}";
-                        //scoreManager.Add(new Score()
-                        //    {
-                        //        PlayerName = "Ali",
-                        //        Value = score,
-                        //    }
-                        //);
-                        ScoreManager.Save(storeScore);
+
                     }
                 }
             }
@@ -333,7 +327,7 @@ namespace GameFinalProject
                 MediaPlayer.Pause();
 
                 // display GAME OVER message
-                overMsg.Message = $" GAME OVER \n Your total Score : {score} \n - Enter your name (< 5 characters)\n and press [Enter]\n" +
+                overMsg.Message = $" GAME OVER \n Your total Score is : {score} \n - Enter your name (< 5 characters)\n and press [Enter]\n" +
                     $" - Or press [ESC] key \n to go back to menu.";
                 Vector2 dimension = fontHigh.MeasureString(overMsg.Message);
 
@@ -347,8 +341,23 @@ namespace GameFinalProject
                     extraMsg.Message = $"Name {playerInput.Message} Entered!";
                     extraMsg.Position = new Vector2(10, dimension.Y + 50);
                     this.Components.Add(extraMsg);
-                    Shared.playerArr[5] = playerInput.Message;
-                    Shared.scoreArr[5] = score;
+
+
+                    if (!isSaved)
+                    {
+                        string storeScore = $"{playerInput.Message} {score}";
+
+                        ScoreManager.Save(storeScore);
+                        isSaved = true;
+                    }
+                    //scoreManager.Add(new Score()
+                    //    {
+                    //        PlayerName = "Ali",
+                    //        Value = score,
+                    //    }
+                    //);
+                    //Shared.playerArr[5] = playerInput.Message;
+                    //Shared.scoreArr[5] = score;
                 }
             }
 

@@ -29,7 +29,7 @@ namespace GameFinalProject
             {
                 temp += (i + 1).ToString();
                 highScore[i] = new StringComponent(game, spriteBatch, fontHigh, new Vector2(100, 200 + 100 * i), "", Color.Yellow);
-                highScore[i].Message = $"{i+1} - {Shared.playerArr[i]} : {Shared.scoreArr[i]} \n";
+                //highScore[i].Message = $"{i+1} - {Shared.playerArr[i]} : {Shared.scoreArr[i]} \n";
                 this.Components.Add(highScore[i]);
             }
         }

@@ -74,11 +74,11 @@ namespace GameFinalProject
             // Shared.scoreArr[];
 
             //TEST
-            for (int i = 0; i < 6; i++)
-            {
-                Shared.playerArr[i] = "ABC";
-                Shared.scoreArr[i] =1000 - 100 * i;
-            }
+            //for (int i = 0; i < 6; i++)
+            //{
+            //    Shared.playerArr[i] = "ABC";
+            //    Shared.scoreArr[i] =1000 - 100 * i;
+            //}
 
             base.Initialize();
         }
@@ -249,7 +249,7 @@ namespace GameFinalProject
                     startScene.Show();
                     LoadContent();
                     SwitchMusic(startMusic);
-                    ScoreManager.Compare(Shared.scoreArr[5], Shared.playerArr[5]);
+                    //ScoreManager.Compare(Shared.scoreArr[5], Shared.playerArr[5]);
                 }
             }
 

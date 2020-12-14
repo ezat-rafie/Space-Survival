@@ -13,26 +13,27 @@ namespace GameFinalProject
         private static string fileName = "scores.txt";
         public List<Score> Highscores { get; private set; }
         public List<Score> Scores { get; private set; }
+        
 
-        public ScoreManager() : this(new List<Score>())
-        {
+        //public ScoreManager() : this(new List<Score>())
+        //{
 
-        }
+        //}
 
-        public ScoreManager(List<Score> scores)
-        {
-            Scores = scores;
-            UpdateHighScores();
-        }
+        //public ScoreManager(List<Score> scores)
+        //{
+        //    Scores = scores;
+        //    UpdateHighScores();
+        //}
 
-        public void Add(Score score)
-        {
-            Scores.Add(score);
+        //public void Add(Score score)
+        //{
+        //    Scores.Add(score);
 
             //Scores = Scores.OrderByDescending(c => c.Value).ToList();
 
             //UpdateHighScores();
-        }
+        //}
 
         
 
@@ -62,10 +63,10 @@ namespace GameFinalProject
             }
         }
 
-        public void UpdateHighScores()
-        {
-            Highscores = Scores.Take(5).ToList();
-        }
+        //public void UpdateHighScores()
+        //{
+        //    Highscores = Scores.Take(5).ToList().OrderByDescending(c => c.Value).ToList();
+        //}
 
         public static void Save(string scoreName)
         {
@@ -81,31 +82,31 @@ namespace GameFinalProject
 
         public static void Compare(int newSc, string newPl)
         {
-            if (newSc > Shared.scoreArr[4])
-            {
-                if (newSc > Shared.scoreArr[3])
-                {
-                    if (newSc > Shared.scoreArr[2])
-                    {
-                        if (newSc > Shared.scoreArr[1])
-                        {
-                            if (newSc > Shared.scoreArr[0])
-                            {
-                                Shared.playerArr[0] = newPl;
-                                Shared.scoreArr[0] = newSc;
-                            }
-                        }
-                        Shared.playerArr[1] = newPl;
-                        Shared.scoreArr[1] = newSc;
-                    }
-                    Shared.playerArr[2] = newPl;
-                    Shared.scoreArr[2] = newSc;
-                }
-                Shared.playerArr[3] = newPl;
-                Shared.scoreArr[3] = newSc;
-            }
-            Shared.playerArr[4] = newPl;
-            Shared.scoreArr[4] = newSc;
+            //if (newSc > Shared.scoreArr[4])
+            //{
+            //    if (newSc > Shared.scoreArr[3])
+            //    {
+            //        if (newSc > Shared.scoreArr[2])
+            //        {
+            //            if (newSc > Shared.scoreArr[1])
+            //            {
+            //                if (newSc > Shared.scoreArr[0])
+            //                {
+            //                    Shared.playerArr[0] = newPl;
+            //                    Shared.scoreArr[0] = newSc;
+            //                }
+            //            }
+            //            Shared.playerArr[1] = newPl;
+            //            Shared.scoreArr[1] = newSc;
+            //        }
+            //        Shared.playerArr[2] = newPl;
+            //        Shared.scoreArr[2] = newSc;
+            //    }
+            //    Shared.playerArr[3] = newPl;
+            //    Shared.scoreArr[3] = newSc;
+            //}
+            //Shared.playerArr[4] = newPl;
+            //Shared.scoreArr[4] = newSc;
         }
     }
 }

@@ -4,30 +4,30 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Fonts/HighlightFont.spritefont</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Fonts/RegularFont.spritefont</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Fonts/SpecialFont.spritefont</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/About.png</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/Alien.png</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/Astronaut.png</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/BigExplosion.png</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/Explosion.png</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/Fireball2.png</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/GameBackground.jpg</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/Icon.png</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/Laser.png</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/Menu.jpg</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/newbg.jpg</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/Rocket.png</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/SpaceShip Explosion.png</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Sounds/alienDye.mp3</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Sounds/alienDying.wav</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Sounds/BackgroundMusic.mp3</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Sounds/Click.wav</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Sounds/Explosion.wav</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Sounds/GameOver.wav</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Sounds/StartMusic.mp3</File>
-    <File>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Sounds/WinSound.wav</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Fonts/HighlightFont.spritefont</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Fonts/RegularFont.spritefont</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Fonts/SpecialFont.spritefont</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Images/About.png</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Images/Alien.png</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Images/Astronaut.png</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Images/BigExplosion.png</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Images/Explosion.png</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Images/Fireball2.png</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Images/GameBackground.jpg</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Images/Icon.png</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Images/Laser.png</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Images/Menu.jpg</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Images/newbg.jpg</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Images/Rocket.png</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Images/SpaceShip Explosion.png</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Sounds/alienDye.mp3</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Sounds/alienDying.wav</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Sounds/BackgroundMusic.mp3</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Sounds/Click.wav</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Sounds/Explosion.wav</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Sounds/GameOver.wav</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Sounds/StartMusic.mp3</File>
+    <File>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Sounds/WinSound.wav</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/SpaceShip Explosion.png</SourceFile>
-  <SourceTime>2020-12-13T11:32:23.0428505-05:00</SourceTime>
-  <DestFile>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/bin/Windows/Content/Images/SpaceShip Explosion.xnb</DestFile>
-  <DestTime>2020-12-13T11:33:06.8670229-05:00</DestTime>
+  <SourceFile>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Images/SpaceShip Explosion.png</SourceFile>
+  <SourceTime>2020-12-13T01:54:50.434739-05:00</SourceTime>
+  <DestFile>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/bin/Windows/Content/Images/SpaceShip Explosion.xnb</DestFile>
+  <DestTime>2020-12-13T20:39:42.5010364-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

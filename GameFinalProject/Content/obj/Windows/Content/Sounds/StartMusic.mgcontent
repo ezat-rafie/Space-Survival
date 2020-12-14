@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Sounds/StartMusic.mp3</SourceFile>
-  <SourceTime>2020-12-11T03:38:08.5300232-05:00</SourceTime>
-  <DestFile>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/bin/Windows/Content/Sounds/StartMusic.xnb</DestFile>
-  <DestTime>2020-12-13T11:33:11.2846626-05:00</DestTime>
+  <SourceFile>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Sounds/StartMusic.mp3</SourceFile>
+  <SourceTime>2020-12-07T10:11:54.0000999-05:00</SourceTime>
+  <DestFile>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/bin/Windows/Content/Sounds/StartMusic.xnb</DestFile>
+  <DestTime>2020-12-13T20:40:01.754447-05:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
   <Processor>SongProcessor</Processor>
@@ -15,6 +15,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/bin/Windows/Content/Sounds/StartMusic.wma</string>
+    <string>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/bin/Windows/Content/Sounds/StartMusic.wma</string>
   </BuildOutput>
 </PipelineBuildEvent>
