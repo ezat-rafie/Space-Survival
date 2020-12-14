@@ -69,17 +69,6 @@ namespace GameFinalProject
             graphics.ApplyChanges();
             Shared.stage = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
-            // Bring Score here
-            // Shared.playerArr[];
-            // Shared.scoreArr[];
-
-            //TEST
-            //for (int i = 0; i < 6; i++)
-            //{
-            //    Shared.playerArr[i] = "ABC";
-            //    Shared.scoreArr[i] =1000 - 100 * i;
-            //}
-
             base.Initialize();
         }
         

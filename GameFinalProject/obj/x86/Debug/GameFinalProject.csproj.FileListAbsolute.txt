@@ -102,7 +102,6 @@ C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Wi
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Alien.xnb
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Astronaut.xnb
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Explosion.xnb
-C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Icon.xnb
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Rocket.xnb
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\SpaceShip Explosion.xnb
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Fonts\HighlightFont.xnb
@@ -182,7 +181,6 @@ C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Wi
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Sounds\alienDye.wma
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Sounds\alienDye.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Sounds\alienDying.xnb
-C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Laser.xnb
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Sounds\alienDying.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Laser.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Fireball.xnb
