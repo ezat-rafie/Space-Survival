@@ -140,7 +140,7 @@ namespace GameFinalProject
             helpScene = new HelpScene(this, spriteBatch);
             this.Components.Add(helpScene);
 
-            highScoreScene = new HighScoreScene(this, spriteBatch);
+            highScoreScene = new HighScoreScene(this, spriteBatch, menuBackground);
             this.Components.Add(highScoreScene);
 
             aboutScene = new AboutScene(this, spriteBatch, menuBackground);

@@ -17,6 +17,7 @@ namespace GameFinalProject
         private SpriteBatch spriteBatch;
         private Texture2D helpPage;
         private Vector2 position = new Vector2(0, 0);
+
         public HelpScene(Game game, SpriteBatch spriteBatch) : base(game)
         {
             this.spriteBatch = spriteBatch;

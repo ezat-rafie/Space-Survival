@@ -29,7 +29,10 @@ namespace GameFinalProject
         private ScoreManager scoreManager;
         private string loadScore;
 
-        public HighScoreScene(Game game, SpriteBatch spriteBatch) : base(game)
+
+        private Texture2D menuBackground;
+
+        public HighScoreScene(Game game, SpriteBatch spriteBatch,Texture2D menuBackground) : base(game)
         {
             this.spriteBatch = spriteBatch;
             fontHigh = game.Content.Load<SpriteFont>("Fonts/HighlightFont");
@@ -41,6 +44,7 @@ namespace GameFinalProject
                 this.Components.Add(highScore[i]);
             }
 
+            this.menuBackground = menuBackground;
 
             loadScore = ScoreManager.Load();
             this.scoreFont = game.Content.Load<SpriteFont>("Fonts/RegularFont");
@@ -55,6 +59,7 @@ namespace GameFinalProject
         {
             spriteBatch.Begin();
             //spriteBatch.DrawString(scoreFont, "Highscores: \n" + string.Join("\n", scoreManager.Highscores.Select(c => c.PlayerName + ": " + c.Value).ToArray()), new Vector2(50, 50), Color.Red);
+            spriteBatch.Draw(menuBackground, Vector2.Zero, Color.White);
             spriteBatch.DrawString(scoreFont, "Highscores: \n" + loadScore, new Vector2(50, 50), Color.Red);
             spriteBatch.End();
             base.Draw(gameTime);
