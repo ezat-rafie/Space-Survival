@@ -23,10 +23,7 @@ namespace GameFinalProject
         private Texture2D background;
         private Vector2 position = new Vector2(0,0);
 
-        //Score
-        private SpriteFont scoreFont;
-        private ScoreManager scoreManager;
-        private string loadScore;
+
 
         private string[] menuArray = { "Play Game", "Help", "High Score", "About", "Exit" };
         public MenuComponent Menu { get => menu; set => menu = value; }
@@ -47,15 +44,6 @@ namespace GameFinalProject
             MediaPlayer.IsRepeating = true;
             this.click = click;
             this.background = background;
-
-
-            loadScore = ScoreManager.Load();
-            this.scoreFont = game.Content.Load<SpriteFont>("Fonts/RegularFont");
-            //playScene = new PlayScene(game, spriteBatch, song, background, 1);
-            //if (playScene.IsOver == true)
-            //{
-            //    this.score = playScene.Score;
-            //}
         }
 
         public override void Draw(GameTime gameTime)
@@ -63,9 +51,6 @@ namespace GameFinalProject
             spriteBatch.Begin();
            
             spriteBatch.Draw(background, position, Color.White);
-            //spriteBatch.DrawString(scoreFont, "Highscores: \n" + string.Join("\n", scoreManager.Highscores.Select(c => c.PlayerName + ": " + c.Value).ToArray()), new Vector2(50, 50), Color.Red);
-            spriteBatch.DrawString(scoreFont, "Highscores: \n" +loadScore, new Vector2(50, 50), Color.Red);
-
             spriteBatch.End();
             
             base.Draw(gameTime);

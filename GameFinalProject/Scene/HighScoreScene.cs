@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace GameFinalProject
 {
@@ -22,8 +24,14 @@ namespace GameFinalProject
 
         Score scoreTest = new Score();
 
+        //Score
+        private SpriteFont scoreFont;
+        private ScoreManager scoreManager;
+        private string loadScore;
+
         public HighScoreScene(Game game, SpriteBatch spriteBatch) : base(game)
         {
+            this.spriteBatch = spriteBatch;
             fontHigh = game.Content.Load<SpriteFont>("Fonts/HighlightFont");
             for (int i =0 ; i < 5 ; i++)
             {
@@ -32,10 +40,23 @@ namespace GameFinalProject
                 //highScore[i].Message = $"{i+1} - {Shared.playerArr[i]} : {Shared.scoreArr[i]} \n";
                 this.Components.Add(highScore[i]);
             }
+
+
+            loadScore = ScoreManager.Load();
+            this.scoreFont = game.Content.Load<SpriteFont>("Fonts/RegularFont");
+            //playScene = new PlayScene(game, spriteBatch, song, background, 1);
+            //if (playScene.IsOver == true)
+            //{
+            //    this.score = playScene.Score;
+            //}
         }
 
         public override void Draw(GameTime gameTime)
         {
+            spriteBatch.Begin();
+            //spriteBatch.DrawString(scoreFont, "Highscores: \n" + string.Join("\n", scoreManager.Highscores.Select(c => c.PlayerName + ": " + c.Value).ToArray()), new Vector2(50, 50), Color.Red);
+            spriteBatch.DrawString(scoreFont, "Highscores: \n" + loadScore, new Vector2(50, 50), Color.Red);
+            spriteBatch.End();
             base.Draw(gameTime);
         }
 
