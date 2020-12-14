@@ -12,8 +12,12 @@ using AnimationExplosion;
 
 namespace GameFinalProject
 {
+    /// <summary>
+    /// Main action scene for playing game
+    /// </summary>
     public class PlayScene : GameScene
     {
+        #region global variables
         private int level;
 
         private SpriteBatch spriteBatch;
@@ -23,18 +27,14 @@ namespace GameFinalProject
         private bool isOver = false;
         public bool hitFireball;
         private Vector2 backgroundPosition = new Vector2(0,-400);
-        //public bool IsOver { get => isOver; set => isOver = value; }
 
         //Alien
         private Alien alien;
-        //private Vector2 alienSpeed = new Vector2(1, 1);
-        //private Vector2 alienPosition = new Vector2(2, 2);
 
         //Multiple aliens
         Alien[] aliens;
         Random random = new Random();
         private int maxAlien = 8;
-        //private int minAlien = 1;
         Rectangle alienRect;
 
         //Fireball
@@ -43,8 +43,6 @@ namespace GameFinalProject
 
         private int minPositionX = 0;
         private int maxPositionX = 900;
-        //private int minAlienPositionY = -1500;
-        //private int maxAlienPositionY = 200;
 
         private int minSpeed = 3;
         private int maxSpeed = 5;
@@ -62,8 +60,8 @@ namespace GameFinalProject
         // add string components
         StringComponent overMsg;
         StringComponent scoreInfo;
-        string totalScore;
-        string msg;
+        StringComponent playerInput;
+        StringComponent extraMsg;
         SpriteFont fontReg;
         SpriteFont fontHigh;
         private int score = 0;
@@ -77,17 +75,12 @@ namespace GameFinalProject
         // time gap between creating next alien
         private int delay = 100;
 
-        // timer role (practice)
-        //private int delayCounter;
-        //private int timer;
-
         //Mouse click explosion
         private Explosion explosion;
         private MouseState oldState;
         private SoundEffect shootingSound;
         private Texture2D explosionSprite;
         Rectangle explosionRect;
-        //private Rectangle overlapKill;
 
         //Rocket
         private Rocket rocket;
@@ -99,7 +92,11 @@ namespace GameFinalProject
         private GameOver gameOverExplosion;
         private Texture2D bigExplosion;
         private SoundEffect gameOverSound;
+        #endregion
 
+
+
+        #region constructor
         public PlayScene(Game game, 
             SpriteBatch spriteBatch, 
             Song song, 
@@ -117,7 +114,7 @@ namespace GameFinalProject
             //Game over explosion
             bigExplosion = game.Content.Load<Texture2D>("Images/SpaceShip Explosion");
             gameOverSound = game.Content.Load<SoundEffect>("Sounds/GameOver");
-            gameOverExplosion = new GameOver(game, spriteBatch, bigExplosion, Vector2.Zero, gameOverSound, 3);
+            gameOverExplosion = new GameOver(game, spriteBatch, bigExplosion, new Vector2(10, 10), gameOverSound, 3);
             this.Components.Add(gameOverExplosion);
 
             // Rocket
@@ -126,7 +123,6 @@ namespace GameFinalProject
 
             //Alien
             alien = new Alien(game, spriteBatch, game.Content.Load<Texture2D>("Images/Alien"), 3);
-            //this.Components.Add(alien);
 
             //aliens
             aliens = new Alien[maxAlien];
@@ -164,25 +160,25 @@ namespace GameFinalProject
             this.Components.Add(shooting);
 
             
-            // getting mouse position practice
-            fontHigh = game.Content.Load<SpriteFont>("Fonts/HighlightFont");
-            msg = "";
-            overMsg = new StringComponent(game, spriteBatch, fontHigh, Vector2.Zero, msg, Color.Yellow);
-            this.Components.Add(overMsg);
-
-            
             // Point
             score = 0;
             fontReg = game.Content.Load<SpriteFont>("Fonts/RegularFont");
-            string totalScore = " ";
-            scoreInfo = new StringComponent(game, spriteBatch, fontReg, Vector2.Zero, totalScore, Color.AliceBlue);
+            scoreInfo = new StringComponent(game, spriteBatch, fontReg, Vector2.Zero, "", Color.AliceBlue);
             this.Components.Add(scoreInfo);
+
+            // Game Over message
+            fontHigh = game.Content.Load<SpriteFont>("Fonts/HighlightFont");
+            overMsg = new StringComponent(game, spriteBatch, fontHigh, Vector2.Zero, "", Color.Yellow);
+            this.Components.Add(overMsg);
+            playerInput = new StringComponent(game, spriteBatch, fontReg, Vector2.Zero, "", Color.Red);
+            extraMsg = new StringComponent(game, spriteBatch, fontHigh, Vector2.Zero, "", Color.Yellow);
 
             gameOver = game.Content.Load<Texture2D>("Images/BigExplosion");
 
             //Score
             scoreManager = new ScoreManager();
         }
+        #endregion
 
         public override void Draw(GameTime gameTime)
         {
@@ -199,10 +195,11 @@ namespace GameFinalProject
             base.Draw(gameTime);
         }
 
+
+        // variables to make time gaps between creating aliens, creating fireballs
         int i = 0;
         int j = 0;
         int k = 0;
-
 
         public override void Update(GameTime gameTime)
         {
@@ -242,24 +239,12 @@ namespace GameFinalProject
                 }
                 k++;
 
-                // Aliens' movement
-                //foreach (Alien alien in aliens)
-                //{
-                //    Vector2 direction = astronaut.Position - alien.Position;
-                //    direction.Normalize();
-                //    alien.Position += direction * alien.Speed;
-                //}
-
                 //mouseClick explosion
                 MouseState ms = Mouse.GetState();
                 if (ms.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
                 {
                     explosion.Position = new Vector2(ms.X - 55, ms.Y - 55);
                     explosion.start();
-
-                    //laser.MousePosition = new Vector2(ms.X, ms.Y);
-                    //laser.Position = new Vector2(astronaut.Position.X + 64, astronaut.Position.Y + 5);
-                    //laser.start();
 
                     shootingSound.Play();
                     explosionRect = explosion.getBound();
@@ -301,23 +286,8 @@ namespace GameFinalProject
                 {
                     alienRect = alien.GetBound();
                     overlapDie = new Rectangle();
-                    //overlapKill = new Rectangle();
                     overlapDie = Rectangle.Intersect(alienRect, astronautRect);
-                    //overlapKill = Rectangle.Intersect(alienRect, explosionRect);
                     int overlapDieDim = overlapDie.Width * overlapDie.Height;
-                    //int overlapKillDim = overlapKill.Width * overlapKill.Height;
-
-                    //if (overlapKillDim > 800 && alien.IsAlive)
-                    //{
-                    //    alien.Speed += alien.Speed * 10;
-                    //    alien.hide();
-                    //    alienDying.Play();
-                    //    alienRect = Rectangle.Empty;
-                    //    explosionRect = Rectangle.Empty;
-                    //    alien.IsAlive = false;
-                    //    score += 100;
-                    //    break;
-                    //}
 
                     // used mouseRect instead of explosionRect
                     // for better targeting
@@ -347,38 +317,12 @@ namespace GameFinalProject
                         //    }
                         //);
                         ScoreManager.Save(storeScore);
-
-
-                        //var result = MessageBox.Show("Game Over", $"You died! Score : {score}", new[] { "New Game", "Main Page" });
-
-                        //if (result.ToString() !=null)
-                        //{
-                        //    string mg = result.ToString();
-                        //    info.Message = mg;
-                        //    Vector2 dimension = font.MeasureString(mg);
-                        //    Vector2 strPos = new Vector2(Shared.stage.X - dimension.X,
-                        //        Shared.stage.Y - dimension.Y);
-                        //    info.Position = strPos;
-
-                        //}
                     }
-                    //if (astronautRect.Intersects(alienRect) && alien.IsAlive)
-                    //{
-                    //    MessageBox.Show("Game Over", "You died", new[] { "New Game", "Main Page", "Exit" });
-                    //    this.Enabled = false;
-                    //}
                 }
-
             }
             else
             {
-                msg = $" GAME OVER \n Your total Score : {score} \n Please press [ESC] key \n to go back to menu.";
-                Vector2 dimension = fontHigh.MeasureString(msg);
-                Vector2 strPos = new Vector2(10, Shared.stage.Y / 2 - dimension.X / 2);
-                overMsg.Position = strPos;
-                overMsg.Message = msg;
-
-                //GraphicsDevice.Clear(Color.Black);
+                // remove components
                 this.Components.Remove(fireball);
                 this.Components.Remove(rocket);
                 this.Components.Remove(scoreInfo);
@@ -387,30 +331,29 @@ namespace GameFinalProject
                     this.Components.Remove(alien);
                 }
                 MediaPlayer.Pause();
-            }
 
+                // display GAME OVER message
+                overMsg.Message = $" GAME OVER \n Your total Score : {score} \n - Enter your name (< 5 characters)\n and press [Enter]\n" +
+                    $" - Or press [ESC] key \n to go back to menu.";
+                Vector2 dimension = fontHigh.MeasureString(overMsg.Message);
 
-            /*
-            delayCounter++;
-            if (delayCounter > delay)
-            {
-                timer = timer + 1;
-                delayCounter = 0;
+                // get player name
+                playerInput.GetKeys();
+                Vector2 strPos = new Vector2(10, dimension.Y + 10);
+                playerInput.Position = strPos;
+                this.Components.Add(playerInput);
+                if (playerInput.nameDone)
+                {
+                    extraMsg.Message = $"Name {playerInput.Message} Entered!";
+                    extraMsg.Position = new Vector2(10, dimension.Y + 50);
+                    this.Components.Add(extraMsg);
+                    Shared.playerArr[5] = playerInput.Message;
+                    Shared.scoreArr[5] = score;
+                }
             }
-            */
-            ////Update mouse info
-            //ms = Mouse.GetState();
-            //string msg = $"MOUSE POSITION : {ms.X} , {ms.Y}";
-            //Vector2 dimension = font.MeasureString(msg);
-            //Vector2 strPos = new Vector2(Shared.stage.X - dimension.X,
-            //    Shared.stage.Y - dimension.Y);
-            //info.Position = strPos;
-            //info.Message = msg;
-            
 
             // Update score info
-            totalScore = $"SCORE : {score}";
-            scoreInfo.Message = totalScore;
+            scoreInfo.Message = $"SCORE : {score}";
 
             //Initialize it
             mouseRect = new Rectangle(0, 0, 0, 0);

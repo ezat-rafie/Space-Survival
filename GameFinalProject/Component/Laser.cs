@@ -68,10 +68,6 @@ namespace AnimationExplosion
                 bulletdirection.Normalize();
                 Speed = new Vector2(150, 150);
                 Position += bulletdirection * Speed;
-                //if (explosionRect.Intersects(getBound()))
-                //{
-                //    hide();
-                //}
                 delayCounter = 0;
             }
             base.Update(gameTime);

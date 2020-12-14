@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
@@ -14,8 +14,7 @@ namespace GameFinalProject
         public List<Score> Highscores { get; private set; }
         public List<Score> Scores { get; private set; }
 
-        public ScoreManager()
-            : this(new List<Score>())
+        public ScoreManager() : this(new List<Score>())
         {
 
         }
@@ -34,6 +33,8 @@ namespace GameFinalProject
 
             //UpdateHighScores();
         }
+
+        
 
         public static string Load()
         {
@@ -75,6 +76,36 @@ namespace GameFinalProject
 
                 //serilizer.Serialize(writer, scoreManager.Scores);
             }
+        }
+
+
+        public static void Compare(int newSc, string newPl)
+        {
+            if (newSc > Shared.scoreArr[4])
+            {
+                if (newSc > Shared.scoreArr[3])
+                {
+                    if (newSc > Shared.scoreArr[2])
+                    {
+                        if (newSc > Shared.scoreArr[1])
+                        {
+                            if (newSc > Shared.scoreArr[0])
+                            {
+                                Shared.playerArr[0] = newPl;
+                                Shared.scoreArr[0] = newSc;
+                            }
+                        }
+                        Shared.playerArr[1] = newPl;
+                        Shared.scoreArr[1] = newSc;
+                    }
+                    Shared.playerArr[2] = newPl;
+                    Shared.scoreArr[2] = newSc;
+                }
+                Shared.playerArr[3] = newPl;
+                Shared.scoreArr[3] = newSc;
+            }
+            Shared.playerArr[4] = newPl;
+            Shared.scoreArr[4] = newSc;
         }
     }
 }

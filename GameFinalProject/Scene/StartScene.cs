@@ -11,6 +11,9 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace GameFinalProject
 {
+    /// <summary>
+    /// The first scene when player open this game. Displaying menu.
+    /// </summary>
     public class StartScene : GameScene
     {
         private SpriteBatch spriteBatch;

@@ -185,7 +185,6 @@ C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Laser.xnb
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Sounds\alienDying.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Laser.xnb
-C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\bomb.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Fireball.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Fireball2.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\BigExplosion.xnb
@@ -193,3 +192,4 @@ C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Wi
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\About.xnb
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\BigExplosion.xnb
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Fireball2.xnb
+C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\About.xnb

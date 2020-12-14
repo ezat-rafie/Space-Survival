@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace GameFinalProject
 {
+    /// <summary>
+    /// Astronaut component
+    /// </summary>
     public class Astronaut : DrawableGameComponent
     {
         private SpriteBatch spriteBatch;
@@ -36,8 +39,6 @@ namespace GameFinalProject
             speed = new Vector2(5, 0);
             this.delay = delay;
 
-            // dimension = new Vector2(WIDTH, HEIGHT);
-            //hide();
             createFrames();
         }
 
@@ -90,7 +91,6 @@ namespace GameFinalProject
                 if (frameIndex > 3 * tex.Width / WIDTH - 1)
                 {
                     frameIndex = -1;
-                    //hide();
                 }
                 delayCounter = 0;
             }

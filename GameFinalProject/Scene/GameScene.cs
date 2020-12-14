@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameFinalProject
 {
+    /// <summary>
+    /// Common characteristics for all scenes
+    /// </summary>
     public abstract class GameScene : DrawableGameComponent
     {
         private List<GameComponent> components;
@@ -34,7 +37,7 @@ namespace GameFinalProject
 
         protected GameScene(Game game) : base(game)
         {
-            //* When child instance is created it will be hidden by default
+            // When child instance is created it will be hidden by default
             components = new List<GameComponent>();
             Hide();
         }
@@ -50,7 +53,7 @@ namespace GameFinalProject
                     comp = (DrawableGameComponent)item;
                     if (comp.Visible)
                     {
-                        //* If the scene is DrawableGameComponent and selected to be enabled then draw it
+                        // If the scene is DrawableGameComponent and selected to be enabled then draw it
                         comp.Draw(gameTime);
                     }
                 }
@@ -64,7 +67,7 @@ namespace GameFinalProject
             {
                 if (item.Enabled)
                 {
-                    //* If the scene is selected to be enabled then update it
+                    // If the scene is selected to be enabled then update it
                     item.Update(gameTime);
                 }
             }

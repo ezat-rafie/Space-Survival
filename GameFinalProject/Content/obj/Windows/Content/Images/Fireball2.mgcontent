@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/Images/Fireball2.png</SourceFile>
-  <SourceTime>2020-12-12T19:09:43.6969148-05:00</SourceTime>
-  <DestFile>C:/Users/ezatr/source/repos/SpaceSurvival/Space-Survival/GameFinalProject/Content/bin/Windows/Content/Images/Fireball2.xnb</DestFile>
-  <DestTime>2020-12-13T06:30:27.855831-05:00</DestTime>
+  <SourceFile>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/Images/Fireball2.png</SourceFile>
+  <SourceTime>2020-12-12T18:53:58.0733713-05:00</SourceTime>
+  <DestFile>C:/Users/kkimk/Documents/GitHub/Space-Survival/GameFinalProject/Content/bin/Windows/Content/Images/Fireball2.xnb</DestFile>
+  <DestTime>2020-12-13T11:33:05.305798-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

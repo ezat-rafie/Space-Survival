@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameFinalProject
 {
+    /// <summary>
+    /// Help Scene for describing what game is this & how to play
+    /// </summary>
     public class HelpScene : GameScene
     {
         private SpriteBatch spriteBatch;

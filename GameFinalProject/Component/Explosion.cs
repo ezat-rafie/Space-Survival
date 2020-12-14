@@ -10,6 +10,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace AnimationExplosion
 {
+    /// <summary>
+    /// explosion : when the player click the screen(which means shooting) , explosion is created
+    /// </summary>
     public class Explosion : DrawableGameComponent
     {
         private SpriteBatch spriteBatch;

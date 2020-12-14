@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace GameFinalProject
 {
@@ -26,6 +25,7 @@ namespace GameFinalProject
         private const int COL = 5;
 
         public Vector2 Position { get => position; set => position = value; }
+
 
         public GameOver(Game game,
             SpriteBatch spriteBatch,
@@ -108,5 +108,6 @@ namespace GameFinalProject
         {
             return new Rectangle((int)position.X + 10, (int)position.Y + 10, tex.Width / COL - 20, tex.Height / ROW - 20);
         }
+
     }
 }

@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace GameFinalProject
 {
+    /// <summary>
+    /// Alien component
+    /// </summary>
     public class Alien : DrawableGameComponent
     {
         private SpriteBatch spriteBatch;
@@ -21,9 +24,6 @@ namespace GameFinalProject
         private int delay;
         private int delayCounter;
         private bool isAlive;
-
-        //private const int WIDTH = 128;
-        //private const int HEIGHT = 128;
 
         private const int ROW = 5;
         private const int COL = 5;
@@ -43,13 +43,13 @@ namespace GameFinalProject
             IsAlive = true;
             dimension = new Vector2(alien.Width / COL, alien.Height / ROW);
 
+            // at first, hide
             hide();
             createFrames();
         }
 
         public void hide()
         {
-            //this.Enabled = false;
             this.Visible = false;
         }
         public void start()

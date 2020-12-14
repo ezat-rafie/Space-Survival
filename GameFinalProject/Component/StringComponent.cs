@@ -16,6 +16,9 @@ namespace GameFinalProject
         public Vector2 Position { get; set; }
         public string Message { get; set; }
         public Color color;
+        public bool nameDone;
+
+        private Keys[] lastPressedKeys = new Keys[5];
 
         public StringComponent(Game game,
             SpriteBatch spriteBatch,
@@ -29,6 +32,7 @@ namespace GameFinalProject
             Position = position;
             Message = message;
             this.color = color;
+            nameDone = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -42,6 +46,44 @@ namespace GameFinalProject
             spriteBatch.DrawString(font, Message, Position, color);
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        public void GetKeys()
+        {
+            KeyboardState kb = Keyboard.GetState();
+
+            Keys[] pressedKeys = kb.GetPressedKeys();
+            foreach (Keys key in lastPressedKeys)
+            {
+                if (!pressedKeys.Contains(key))
+                {
+                    //Key is no longer pressed
+                    OnKeyUp(key);
+                }
+            }
+            foreach (Keys key in pressedKeys)
+            {
+                if (!lastPressedKeys.Contains(key) && !nameDone)//&& Message.Length <5
+                {
+                    OnKeyDown(key);
+                }
+            }
+            lastPressedKeys = pressedKeys;
+        }
+
+        public void OnKeyUp(Keys key)
+        {
+            if (key == Keys.Enter)
+            {
+                nameDone = true;
+            }
+        }
+        public void OnKeyDown(Keys key)
+        {
+            if (key.ToString().Length == 1)
+            {
+                Message += key.ToString();
+            }
         }
     }
 }

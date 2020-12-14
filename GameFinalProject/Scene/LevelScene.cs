@@ -11,6 +11,9 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace GameFinalProject
 {
+    /// <summary>
+    /// Player can choose level in this scene
+    /// </summary>
     public class LevelScene : GameScene
     {
         private SpriteBatch spriteBatch;

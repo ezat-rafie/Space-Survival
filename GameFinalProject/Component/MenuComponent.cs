@@ -25,7 +25,6 @@ namespace GameFinalProject
 
         private Vector2 position;
         private KeyboardState oldState;
-        //* =============================
         private SoundEffect click;
 
         public MenuComponent(Game game,

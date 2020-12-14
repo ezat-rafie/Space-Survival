@@ -46,7 +46,6 @@ namespace GameFinalProject
 
         // keyboardState
         private KeyboardState ks;
-        
         private KeyboardState oldState;
 
         public Game1()
@@ -69,6 +68,18 @@ namespace GameFinalProject
             graphics.PreferredBackBufferHeight = 800;
             graphics.ApplyChanges();
             Shared.stage = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+
+            // Bring Score here
+            // Shared.playerArr[];
+            // Shared.scoreArr[];
+
+            //TEST
+            for (int i = 0; i < 6; i++)
+            {
+                Shared.playerArr[i] = "ABC";
+                Shared.scoreArr[i] =1000 - 100 * i;
+            }
+
             base.Initialize();
         }
         
@@ -160,8 +171,6 @@ namespace GameFinalProject
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-            //* tbh I don't know what these mean but somebody in stackoverflow wrote these so just followed
-            // ! Comment to be deleted
             if (startMusic != null)
             {
                 startMusic.Dispose();
@@ -213,32 +222,9 @@ namespace GameFinalProject
                             break;
                     }
                 }
-                //if(levelScene.Enabled && oldState.IsKeyUp(Keys.Enter))
-                //{
-                //    ks = Keyboard.GetState();
-                //    selectedIndex = levelScene.Menu.SelectedIndex;
-                //    //HideAllScenes();
-                //    if (ks.IsKeyDown(Keys.Enter))
-                //    {
-                //        switch (selectedIndex)
-                //        {
-                //            case 0:
-                //                playScene.Show();
-                //                SwitchMusic(backgroundMusic);
-                //                break;
-                //            case 1:
-                //                playScene.Show();
-                //                SwitchMusic(backgroundMusic);
-                //                break;
-                //            default:
-                //                break;
-                //        }
-                //    }
-                //}
             }
             else if (levelScene.Enabled && oldState.IsKeyUp(Keys.Enter))
             {
-                //KeyboardState ks2 = Keyboard.GetState();
                 selectedIndex = levelScene.Menu.SelectedIndex;
                 if (selectedIndex == 0 && ks.IsKeyDown(Keys.Enter))
                 {
@@ -253,22 +239,17 @@ namespace GameFinalProject
                     SwitchMusic(backgroundMusic);
                 }
             }
-            
-            if (levelScene.Enabled || playScene1.Enabled || playScene2.Enabled || 
+
+            if (levelScene.Enabled || playScene1.Enabled || playScene2.Enabled ||
                 helpScene.Enabled || highScoreScene.Enabled || aboutScene.Enabled)
             {
                 if (ks.IsKeyDown(Keys.Escape))
                 {
                     HideAllScenes();
                     startScene.Show();
-                    //playScene1.score = 0;
-                    //playScene2.score = 0;
-                    //playScene1.isOver = false;
-                    //playScene2.isOver = false;
-                    //this.Components.Remove(playScene1);
-                    //this.Components.Remove(playScene2);
                     LoadContent();
                     SwitchMusic(startMusic);
+                    ScoreManager.Compare(Shared.scoreArr[5], Shared.playerArr[5]);
                 }
             }
 
