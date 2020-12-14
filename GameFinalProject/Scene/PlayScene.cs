@@ -48,7 +48,6 @@ namespace GameFinalProject
         private int maxSpeed = 5;
         
         //Shooting
-        private Shooting shooting;
         private SoundEffect alienDying;
         Rectangle mouseRect;
 
@@ -84,9 +83,6 @@ namespace GameFinalProject
 
         //Rocket
         private Rocket rocket;
-
-        //Laser
-        private Laser laser;
 
         //Game over
         private GameOver gameOverExplosion;
@@ -157,8 +153,6 @@ namespace GameFinalProject
 
             //Shooting
             alienDying = game.Content.Load<SoundEffect>("Sounds/alienDying");
-            shooting = new Shooting(game, alien, explosion);
-            this.Components.Add(shooting);
 
             
             // Point
