@@ -143,7 +143,6 @@ C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Astronaut.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Explosion.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\GameBackground.xnb
-C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Icon.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Menu.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Rocket.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\SpaceShip Explosion.xnb
@@ -181,7 +180,6 @@ C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Sounds\alienDye.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Sounds\alienDying.xnb
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Sounds\alienDying.xnb
-C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Laser.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Fireball.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Fireball2.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\BigExplosion.xnb
@@ -190,3 +188,7 @@ C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Wi
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\BigExplosion.xnb
 C:\Users\ezatr\source\repos\SpaceSurvival\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\Fireball2.xnb
 C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\Content\Images\About.xnb
+C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\GameFinalProject.exe.manifest
+C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\bin\Windows\x86\Debug\GameFinalProject.application
+C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\obj\x86\Debug\GameFinalProject.exe.manifest
+C:\Users\kkimk\Documents\GitHub\Space-Survival\GameFinalProject\obj\x86\Debug\GameFinalProject.application
